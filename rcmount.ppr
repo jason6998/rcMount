@@ -1,0 +1,23 @@
+program rcmount;
+
+{$mode objfpc}{$H+}
+
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Interfaces, // this includes the adLCL widgetset
+  Forms, uFm_WinMount, uFm_Setup, uFm_AddRVD
+  { you can add units after this };
+
+{$R *.res}
+
+begin
+  Application.Title:='rclone 虛擬磁碟掛載管理';
+  RequireDerivedFormResource:=True;
+  Application.Scaled:=True;
+  Application.Initialize;
+  Application.CreateForm(TFm_WinMount, Fm_WinMount);
+  Application.Run;
+end.
+

@@ -1,0 +1,421 @@
+unit uFm_WinMount;
+
+{$mode objfpc}{$H+}
+
+interface
+
+uses
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
+  Buttons, CustomDrawnControls, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
+  registry, ListViewFilterEdit, vte_json, AbComCtrls, process, XMLConf,
+  UTF8Process, Types;
+
+type
+
+  { TFm_WinMount }
+
+  TFm_WinMount = class(TForm)
+    AsyncProcess1: TAsyncProcess;
+    btn_Add: TSpeedButton;
+    btn_Exit: TSpeedButton;
+    btn_Mount: TSpeedButton;
+    btn_Remove: TSpeedButton;
+    btn_SetUp: TSpeedButton;
+    btn_unMount: TSpeedButton;
+    ImageList1: TImageList;
+    Label1: TLabel;
+    LV_RVDList: TListView;
+    N_WinShow: TMenuItem;
+    N_WinClose: TMenuItem;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    PopupMenu1: TPopupMenu;
+    sb_rcMount: TStatusBar;
+    TrayIcon1: TTrayIcon;
+    XMLPropStorage1: TXMLPropStorage;
+    procedure btn_AddClick(Sender: TObject);
+    procedure btn_ExitClick(Sender: TObject);
+    procedure btn_MountClick(Sender: TObject);
+    procedure btn_RemoveClick(Sender: TObject);
+    procedure btn_SetUpClick(Sender: TObject);
+    procedure btn_unMountClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
+      Selected: Boolean);
+    procedure N_WinCloseClick(Sender: TObject);
+    procedure N_WinShowClick(Sender: TObject);
+    procedure TrayIcon1Click(Sender: TObject);
+    procedure XMLPropStorage1RestoreProperties(Sender: TObject);
+    procedure XMLPropStorage1SaveProperties(Sender: TObject);
+    procedure AsyncProcess1Terminate(Sender: TObject);
+  private
+    rcloneFile :String;
+    InitMountDIR :String;
+    CloseNeeded :Boolean;
+    WinAutoRun :Boolean;
+    function ItemToMountCMD(aItem: TListItem;Execute:Boolean=False):TAsyncProcess;
+    function RcloneFileExists(Message:Boolean=True):Boolean;
+    procedure SetStateIndex(aItem: TListItem);
+    procedure SetBtnEnabled(aItem: TListItem);
+    procedure SetAutoRun;
+  protected
+
+  public
+
+  end;
+
+var
+  Fm_WinMount: TFm_WinMount;
+
+implementation
+{$R *.frm}
+
+uses uFm_AddRVD,uFm_Setup;
+
+
+{ TFm_WinMount }
+procedure TFm_WinMount.SetStateIndex(aItem: TListItem);
+var vt:TAsyncProcess;
+begin
+  if not Assigned(aItem) then exit;
+  aItem.StateIndex:=0;
+  if Assigned(aItem.Data) then begin
+    vt := TAsyncProcess(aItem.Data);
+    if vt.Running then
+      aItem.StateIndex:=1
+    else
+      aItem.StateIndex:=0;
+  end;
+end;
+
+procedure TFm_WinMount.SetBtnEnabled(aItem: TListItem);
+begin
+  btn_Remove.Enabled:=False;
+  btn_unMount.Enabled:= False;
+  btn_Mount.Enabled:= False;
+  if not Assigned(aItem) then exit;
+  if not aItem.Selected then exit;
+  btn_Remove.Enabled:=True;
+  if aItem.StateIndex=1 then
+    btn_unMount.Enabled:= True
+  else
+    btn_Mount.Enabled:= True;
+end;
+
+procedure TFm_WinMount.SetAutoRun;
+var Reg: TRegistry;
+begin
+  //設定是否要自動執行
+  //HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  Reg:=TRegistry.Create;
+  try
+    Reg.RootKey:=HKEY_CURRENT_USER;
+    Reg.OpenKey('\Software\Microsoft\Windows\CurrentVersion\Run', true);
+    if WinAutoRun then
+      Reg.WriteString('rcMount',Application.ExeName)
+    else
+     Reg.DeleteValue('rcMount');
+    Reg.CloseKey;
+  finally
+    Reg.Free;
+  end;
+end;
+
+procedure TFm_WinMount.btn_AddClick(Sender: TObject);
+var //vt:TAsyncProcess;
+    aItem: TListItem;
+    ss:String;
+begin
+  //加入
+  if not RcloneFileExists then abort;
+  Fm_AddRVD := TFm_AddRVD.Create(self);
+  try
+    Fm_AddRVD.dir_MountPath.Text := InitMountDIR;
+    Fm_AddRVD.rcloneFile:=rcloneFile;
+    if Fm_AddRVD.ShowModal=mrok then
+    begin
+      aItem := LV_RVDList.Items.Add;
+      aItem.Caption:= '';
+      aItem.SubItems.Add(Fm_AddRVD.ed_RemotePath.Text);  //0 RemotePath
+      if Fm_AddRVD.cb_LocalDrv.ItemIndex>0 then
+        aItem.SubItems.Add(Fm_AddRVD.cb_LocalDrv.Text)   //1 LocalDrv
+      else
+        aItem.SubItems.Add(Fm_AddRVD.dir_MountPath.Text); //1 MountPath
+
+      ss := Fm_AddRVD.cb_CacheMode.Text;
+      if Fm_AddRVD.ck_AllowOther.Checked then
+        ss := ss+' '+'--allow-other';
+      if Fm_AddRVD.ck_AllowRoot.Checked then
+        ss := ss+' '+'--allow-root';
+      if Fm_AddRVD.ck_AllowNonEmpty.Checked then
+        ss := ss+' '+'--allow-non-empty';
+      ss := ss+' '+Fm_AddRVD.Memo_Other.Text;
+      aItem.SubItems.Add(ss); //2 參數
+      if Fm_AddRVD.ck_AutoMount.Checked then
+        aItem.SubItems.Add('1')
+      else
+        aItem.SubItems.Add('0');  //3
+      aItem.Data :=ItemToMountCMD(aItem,True);
+      aItem.StateIndex:=1;
+    end;
+  finally
+    FreeAndNil(Fm_AddRVD);
+  end;
+  SetBtnEnabled(LV_RVDList.Selected);
+end;
+
+procedure TFm_WinMount.AsyncProcess1Terminate(Sender: TObject);
+var i:Integer;
+begin
+  for i := 0 to LV_RVDList.Items.Count-1 do begin
+    SetStateIndex(LV_RVDList.Items[i]);
+  end;
+  SetBtnEnabled(LV_RVDList.Selected);
+end;
+
+procedure TFm_WinMount.btn_ExitClick(Sender: TObject);
+begin
+  CloseNeeded := True;
+  close;
+end;
+
+procedure TFm_WinMount.btn_MountClick(Sender: TObject);
+var vt:TAsyncProcess;
+begin
+  //掛載
+  if not RcloneFileExists then abort;
+  if not Assigned(LV_RVDList.Selected) then abort;
+  if not Assigned(LV_RVDList.Selected.Data) then
+    LV_RVDList.Selected.Data := ItemToMountCMD(LV_RVDList.Selected);     //設定成 MountCMD
+  vt := TAsyncProcess(LV_RVDList.Selected.Data);
+  if not vt.Running then
+    vt.Execute;
+  LV_RVDList.Selected.StateIndex:=1;
+  SetBtnEnabled(LV_RVDList.Selected);
+end;
+
+procedure TFm_WinMount.btn_RemoveClick(Sender: TObject);
+var vt:TAsyncProcess;
+begin
+  //移除
+  if not Assigned(LV_RVDList.Selected) then abort;
+  if MessageDlg('您確定要移除嗎?', mtConfirmation, [mbYes, mbNo],0,mbNo) = mrNo then
+    abort;
+  if Assigned(LV_RVDList.Selected.Data) then begin
+    vt := TAsyncProcess(LV_RVDList.Selected.Data);
+    if vt.Running then
+      vt.Terminate(0);
+    FreeAndNil(vt);
+  end;
+  LV_RVDList.Items[LV_RVDList.ItemIndex].Delete;
+  SetBtnEnabled(LV_RVDList.Selected);
+end;
+
+procedure TFm_WinMount.btn_SetUpClick(Sender: TObject);
+begin
+  //設定
+  Fm_Setup := TFm_Setup.Create(self);
+  try
+    Fm_Setup.File_rclone.Text := rcloneFile;
+    Fm_Setup.dir_InitMount.Text := InitMountDIR;
+    Fm_Setup.ck_WinAutoRun.Checked:=WinAutoRun;
+    if Fm_Setup.ShowModal=mrok then begin
+      rcloneFile := Fm_Setup.File_rclone.Text;
+      InitMountDIR := Fm_Setup.dir_InitMount.Text;
+      WinAutoRun := Fm_Setup.ck_WinAutoRun.Checked;
+      SetAutoRun;
+    end;
+  finally
+    FreeAndNil(Fm_Setup);
+  end;
+end;
+
+procedure TFm_WinMount.btn_unMountClick(Sender: TObject);
+var vt:TAsyncProcess;
+begin
+  //卸載
+  if not Assigned(LV_RVDList.Selected) then abort;
+  if Assigned(LV_RVDList.Selected.Data) then begin
+    vt := TAsyncProcess(LV_RVDList.Selected.Data);
+    if vt.Running then
+      vt.Terminate(0);
+    LV_RVDList.Selected.StateIndex:=0;
+  end;
+  SetBtnEnabled(LV_RVDList.Selected);
+end;
+
+procedure TFm_WinMount.FormClose(Sender: TObject; var CloseAction: TCloseAction
+  );
+begin
+   if CloseNeeded then
+     CloseAction := caFree
+   else
+     CloseAction := caHide;
+end;
+
+procedure TFm_WinMount.FormCreate(Sender: TObject);
+var i :Integer;
+begin
+  XMLPropStorage1.Restore;
+  Application.ProcessMessages;
+{  for i := 0 to LV_RVDList.Items.Count-1 do begin
+    if LV_RVDList.Items[i].SubItems[3]='1' then begin
+      LV_RVDList.Items[i].Data := ItemToMountCMD(LV_RVDList.Items[i],True);     //設定成 MountCMD
+      LV_RVDList.Items[i].StateIndex:=1;
+    end;
+  end;}
+  TrayIcon1.Show;
+  CloseNeeded := False;
+end;
+
+procedure TFm_WinMount.FormDestroy(Sender: TObject);
+var i:Integer;
+    vt:TAsyncProcess;
+begin
+  for i := 0 to LV_RVDList.Items.Count-1 do begin
+    if not Assigned(LV_RVDList.Items[i].Data) then Continue;
+    vt := TAsyncProcess(LV_RVDList.Items[i].Data);
+    //if vt.Running then
+      vt.Terminate(0);
+    FreeAndNil(vt);
+  end;
+  XMLPropStorage1.Save;
+end;
+
+procedure TFm_WinMount.LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
+  Selected: Boolean);
+begin
+  if Selected then begin
+    SetStateIndex(Item);
+    sb_rcMount.SimpleText:='rclone mount '+Item.SubItems[0]+' '+Item.SubItems[1]+' '+Item.SubItems[2];
+  end else
+    sb_rcMount.SimpleText:='';
+  SetBtnEnabled(Item);
+end;
+
+procedure TFm_WinMount.N_WinCloseClick(Sender: TObject);
+begin
+  CloseNeeded := True;
+  close;
+end;
+
+procedure TFm_WinMount.N_WinShowClick(Sender: TObject);
+begin
+  Show;
+end;
+
+procedure TFm_WinMount.TrayIcon1Click(Sender: TObject);
+begin
+  if Showing then
+    Hide
+  else
+    show;
+end;
+
+procedure TFm_WinMount.XMLPropStorage1RestoreProperties(Sender: TObject);
+var St: TStringList;
+
+  procedure StringsListToListView;
+  var
+    spt: TStringList;
+    i, j: Integer;
+    Item: TListItem;
+  begin
+    spt := TStringList.Create;
+    try
+      LV_RVDList.Clear;
+      for i := 0 to St.Count-1 do begin
+        spt.Clear;
+        spt.StrictDelimiter:=True;
+        spt.Delimiter:=#9;
+        spt.DelimitedText:=St[i];
+
+        Item := LV_RVDList.Items.Add;
+        Item.StateIndex:=0;
+        Item.Caption := spt[0];
+        for j := 1 to spt.Count-1 do
+          Item.SubItems.Add(spt[j]);
+      end;
+    finally
+      spt.Free;
+    end;
+  end;
+begin
+  rcloneFile := XMLPropStorage1.ReadString('rcloneFile','');
+  InitMountDIR := XMLPropStorage1.ReadString('InitMountDIR','');
+  WinAutoRun:= XMLPropStorage1.ReadBoolean('WinAutoRun',False);
+  St := TStringList.Create;
+  try
+    XMLPropStorage1.ReadStrings('Items',St,Nil);
+    StringsListToListView;
+  finally
+    st.free;
+  end;
+end;
+
+procedure TFm_WinMount.XMLPropStorage1SaveProperties(Sender: TObject);
+var St: TStringList;
+  procedure ListViewItemToStringList;
+  var
+    ss: string;
+    i, j: Integer;
+  begin
+    for i := 0 to LV_RVDList.Items.Count-1 do begin
+      ss := ''+#9;
+      //ss := LV_RVDList.Items[i].Caption + #9;
+      for j := 0 to LV_RVDList.Items[i].SubItems.Count-1 do
+        ss := ss + LV_RVDList.Items[i].SubItems[j] + #9;
+      St.Add(System.Copy(ss, 1, Length(ss)-1));//remove trailing tab
+    end;
+   end;
+
+begin
+  XMLPropStorage1.WriteString('rcloneFile',rcloneFile);
+  XMLPropStorage1.WriteString('InitMountDIR',InitMountDIR);
+  XMLPropStorage1.WriteBoolean('WinAutoRun',WinAutoRun);
+  St := TStringList.Create;
+  try
+    ListViewItemToStringList;
+    XMLPropStorage1.WriteStrings('Items',St);
+  finally
+    St.Free;
+  end;
+end;
+
+function TFm_WinMount.ItemToMountCMD(aItem: TListItem;Execute:Boolean=False): TAsyncProcess;
+var aParameters : TStrings;
+begin
+  aParameters := TStringList.Create;
+  Result := TAsyncProcess.Create(nil);
+  Result.OnTerminate:=@AsyncProcess1Terminate;
+  try
+    Result.Executable := rcloneFile; //rclone command line
+    Result.Parameters.Add('mount');
+    Result.Parameters.Add(aItem.SubItems[0]); //Remote
+    Result.Parameters.Add(aItem.SubItems[1]); //Local Driver or Path
+    CommandToList(aItem.SubItems[2],aParameters); //其他參數
+    Result.Parameters.AddStrings(aParameters);
+    Result.ShowWindow := swoHIDE;
+    //Result.Options := Result.Options + [poWaitOnExit]; //不可設定
+    if Execute then
+      Result.Execute;
+  finally
+    FreeAndNil(aParameters);
+  end;
+end;
+
+function TFm_WinMount.RcloneFileExists(Message:Boolean): Boolean;
+begin
+  Result := True;
+  if not FileExists(rcloneFile) then begin
+    Result := False;
+    if Message then
+      ShowMessage('請先設定 rclone 執行檔的資料夾位置!');
+  end;
+end;
+
+end.
+

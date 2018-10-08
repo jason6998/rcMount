@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<CONFIG>
-  <TApplication>
-    <Fm_WinMount ItemsCount="3" ItemsItem1="&#x9;gdx:/&#x9;C:\Users\Jason\myvd\gdx&#x9;--vfs-cache-mode writes --allow-other --allow-root --allow-non-empty &#x9;1" ItemsItem2="&#x9;gdx:/&#x9;T:&#x9;--vfs-cache-mode writes --allow-other --allow-root --allow-non-empty &#x9;0" ItemsItem3="&#x9;gdx:/&#x9;R:&#x9;--vfs-cache-mode writes --allow-other --allow-root --allow-non-empty &#x9;0" WinAutoRun="0" rcloneFile="C:\Apps\rclone\rclone.exe" InitMountDIR="C:\Users\Jason\myvd"/>
-  </TApplication>
-</CONFIG>

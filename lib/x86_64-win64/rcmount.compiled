@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\codetyphon\fpc\fpc64\bin\x86_64-win64\fpc.exe" Date="1284133793"/>
+  <Params Value=" -MObjFPC -Scghi -CX -O3 -XX -WG -l -vewnhibq -FiC:\Users\Jason\MyProjects\Projects\GitHub\rcmount\lib\x86_64-win64 -FuC:\codetyphon\typhon\components\pl_VirtualTreesExtra\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\pl_ECControls\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\pl_Abbrevia\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\pl_VirtualTrees\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\BaseIdeintf\units\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\pl_lclextensions\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\components\BaseControls\lib\x86_64-win64\win32 -FuC:\codetyphon\typhon\lcl\units\x86_64-win64\win32 -FuC:\codetyphon\typhon\lcl\units\x86_64-win64 -FuC:\codetyphon\typhon\components\BaseUtils\lib\x86_64-win64 -FuC:\codetyphon\typhon\packager\units\x86_64-win64 -FuC:\Users\Jason\MyProjects\Projects\GitHub\rcmount\ -FUC:\Users\Jason\MyProjects\Projects\GitHub\rcmount\lib\x86_64-win64\ -dLCL -dLCLwin32 rcmount.ppr"/>
+</CONFIG>

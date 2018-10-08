@@ -17,8 +17,7 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MajorVersionNr Value="1"/>
-      <BuildNr Value="8"/>
+      <MajorVersionNr Value="2"/>
       <Language Value="0404"/>
       <StringTable LegalCopyright="Jason Wang"/>
     </VersionInfo>
@@ -72,25 +71,28 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="6">
+    <RequiredPackages Count="7">
       <Item1>
-        <PackageName Value="bs_Utils"/>
+        <PackageName Value="pl_eccontrols"/>
       </Item1>
       <Item2>
-        <PackageName Value="adFCL"/>
+        <PackageName Value="bs_Utils"/>
       </Item2>
       <Item3>
-        <PackageName Value="pl_virtualtreesextra"/>
+        <PackageName Value="adFCL"/>
       </Item3>
       <Item4>
-        <PackageName Value="pl_abbrevia"/>
+        <PackageName Value="pl_virtualtreesextra"/>
       </Item4>
       <Item5>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="pl_abbrevia"/>
       </Item5>
       <Item6>
-        <PackageName Value="adLCL"/>
+        <PackageName Value="bs_Controls"/>
       </Item6>
+      <Item7>
+        <PackageName Value="adLCL"/>
+      </Item7>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

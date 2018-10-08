@@ -43,6 +43,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure N_WinCloseClick(Sender: TObject);
@@ -56,6 +57,7 @@ type
     InitMountDIR :String;
     CloseNeeded :Boolean;
     WinAutoRun :Boolean;
+    FirstShow :Boolean;
     function ItemToMountCMD(aItem: TListItem;Execute:Boolean=False):TAsyncProcess;
     function RcloneFileExists(Message:Boolean=True):Boolean;
     procedure SetStateIndex(aItem: TListItem);
@@ -133,13 +135,13 @@ begin
   if not RcloneFileExists then abort;
   Fm_AddRVD := TFm_AddRVD.Create(self);
   try
-    Fm_AddRVD.dir_MountPath.Text := InitMountDIR;
+    Fm_AddRVD.InitMountDIR := InitMountDIR;
     Fm_AddRVD.rcloneFile:=rcloneFile;
     if Fm_AddRVD.ShowModal=mrok then
     begin
       aItem := LV_RVDList.Items.Add;
       aItem.Caption:= '';
-      aItem.SubItems.Add(Fm_AddRVD.ed_RemotePath.Text);  //0 RemotePath
+      aItem.SubItems.Add(Fm_AddRVD.cb_rcRemote.Text+Fm_AddRVD.ed_RemotePath.Text);  //0 RemotePath
       if Fm_AddRVD.cb_LocalDrv.ItemIndex>0 then
         aItem.SubItems.Add(Fm_AddRVD.cb_LocalDrv.Text)   //1 LocalDrv
       else
@@ -261,14 +263,9 @@ var i :Integer;
 begin
   XMLPropStorage1.Restore;
   Application.ProcessMessages;
-{  for i := 0 to LV_RVDList.Items.Count-1 do begin
-    if LV_RVDList.Items[i].SubItems[3]='1' then begin
-      LV_RVDList.Items[i].Data := ItemToMountCMD(LV_RVDList.Items[i],True);     //設定成 MountCMD
-      LV_RVDList.Items[i].StateIndex:=1;
-    end;
-  end;}
   TrayIcon1.Show;
   CloseNeeded := False;
+  FirstShow :=True;
 end;
 
 procedure TFm_WinMount.FormDestroy(Sender: TObject);
@@ -283,6 +280,19 @@ begin
     FreeAndNil(vt);
   end;
   XMLPropStorage1.Save;
+end;
+
+procedure TFm_WinMount.FormShow(Sender: TObject);
+var i:Integer;
+begin
+  if FirstShow then
+    for i := 0 to LV_RVDList.Items.Count-1 do begin
+      if LV_RVDList.Items[i].SubItems[3]='1' then begin
+        LV_RVDList.Items[i].Data := ItemToMountCMD(LV_RVDList.Items[i],True);     //設定成 MountCMD
+        LV_RVDList.Items[i].StateIndex:=1;
+      end;
+    end;
+  FirstShow:=False;
 end;
 
 procedure TFm_WinMount.LV_RVDListSelectItem(Sender: TObject; Item: TListItem;

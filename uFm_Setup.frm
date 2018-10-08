@@ -13,6 +13,7 @@ object Fm_Setup: TFm_Setup
   Font.Name = 'Microsoft JhengHei UI'
   Font.Pitch = fpVariable
   Font.Quality = fqDraft
+  Position = poMainFormCenter
   LCLVersion = '6.4'
   object Label1: TLabel
     Left = 19

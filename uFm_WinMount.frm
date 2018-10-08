@@ -16,6 +16,7 @@ object Fm_WinMount: TFm_WinMount
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   Position = poScreenCenter
   SessionProperties = 'LV_RVDList.Items'
   ShowHint = True
@@ -26,6 +27,7 @@ object Fm_WinMount: TFm_WinMount
     Top = 56
     Width = 125
     Align = alRight
+    BevelOuter = bvNone
     ClientHeight = 249
     ClientWidth = 125
     TabOrder = 2
@@ -370,13 +372,14 @@ object Fm_WinMount: TFm_WinMount
     end
   end
   object LV_RVDList: TListView
-    Left = 0
-    Height = 249
-    Top = 56
-    Width = 516
+    Left = 5
+    Height = 239
+    Top = 61
+    Width = 506
     Align = alClient
     AutoSort = False
     AutoWidthLastColumn = True
+    BorderSpacing.Around = 5
     BorderWidth = 2
     Columns = <    
       item
@@ -389,7 +392,7 @@ object Fm_WinMount: TFm_WinMount
       end    
       item
         Caption = 'Local Path'
-        Width = 328
+        Width = 318
       end>
     ColumnClick = False
     GridLines = True
@@ -408,17 +411,18 @@ object Fm_WinMount: TFm_WinMount
     Top = 0
     Width = 641
     Align = alTop
+    BevelOuter = bvNone
     ClientHeight = 56
     ClientWidth = 641
     TabOrder = 0
     object Panel3: TPanel
-      Left = 422
-      Height = 54
-      Top = 1
+      Left = 423
+      Height = 56
+      Top = 0
       Width = 218
       Align = alRight
       BevelOuter = bvNone
-      ClientHeight = 54
+      ClientHeight = 56
       ClientWidth = 218
       TabOrder = 0
       object btn_SetUp: TSpeedButton
@@ -506,10 +510,10 @@ object Fm_WinMount: TFm_WinMount
         OnClick = btn_SetUpClick
       end
       object btn_Exit: TSpeedButton
-        Left = 113
+        Left = 128
         Height = 33
         Top = 8
-        Width = 92
+        Width = 68
         Caption = '離開'
         Glyph.Data = {
           36090000424D3609000000000000360000002800000018000000180000000100

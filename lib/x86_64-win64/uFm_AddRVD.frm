@@ -1,7 +1,7 @@
 object Fm_AddRVD: TFm_AddRVD
-  Left = 86
+  Left = 348
   Height = 589
-  Top = 86
+  Top = 220
   Width = 556
   BorderStyle = bsDialog
   Caption = '新建虛擬磁碟'
@@ -170,7 +170,7 @@ object Fm_AddRVD: TFm_AddRVD
     Caption = '其他參數'
     ParentColor = False
   end
-  object Memo_Other: TMemo
+  object mo_RcloneOther: TMemo
     Left = 8
     Height = 75
     Top = 411

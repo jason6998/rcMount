@@ -1,11 +1,11 @@
 object Fm_Setup: TFm_Setup
   Left = 348
-  Height = 243
+  Height = 354
   Top = 220
   Width = 499
   BorderStyle = bsDialog
   Caption = '設定'
-  ClientHeight = 243
+  ClientHeight = 354
   ClientWidth = 499
   Font.CharSet = CHINESEBIG5_CHARSET
   Font.Color = clBlack
@@ -19,8 +19,8 @@ object Fm_Setup: TFm_Setup
     Left = 19
     Height = 20
     Top = 15
-    Width = 83
-    Caption = 'rclone 路徑'
+    Width = 131
+    Caption = 'rclone 命令檔路徑'
     ParentColor = False
   end
   object File_rclone: TFileNameEdit
@@ -38,7 +38,7 @@ object Fm_Setup: TFm_Setup
   object Label2: TLabel
     Left = 19
     Height = 20
-    Top = 87
+    Top = 80
     Width = 176
     Caption = '雲端磁碟預設掛載的目錄'
     ParentColor = False
@@ -46,7 +46,7 @@ object Fm_Setup: TFm_Setup
   object dir_InitMount: TDirectoryEdit
     Left = 19
     Height = 28
-    Top = 111
+    Top = 104
     Width = 453
     ShowHidden = False
     ButtonWidth = 23
@@ -57,7 +57,7 @@ object Fm_Setup: TFm_Setup
   object BtnOK: TBitBtn
     Left = 200
     Height = 30
-    Top = 202
+    Top = 314
     Width = 75
     Caption = '&確定'
     Default = True
@@ -68,9 +68,32 @@ object Fm_Setup: TFm_Setup
   object ck_WinAutoRun: TCheckBox
     Left = 19
     Height = 24
-    Top = 158
+    Top = 248
     Width = 217
     Caption = '在Windows啟動時自動執行'
     TabOrder = 3
+  end
+  object ck_RunTrayIcon: TCheckBox
+    Left = 19
+    Height = 24
+    Top = 275
+    Width = 212
+    Caption = '程式啟動後縮小至系統圖示'
+    TabOrder = 4
+  end
+  object Label3: TLabel
+    Left = 19
+    Height = 20
+    Top = 148
+    Width = 163
+    Caption = 'rclone 執行時預設參數'
+    ParentColor = False
+  end
+  object mo_RcloneOther: TMemo
+    Left = 19
+    Height = 67
+    Top = 173
+    Width = 451
+    TabOrder = 5
   end
 end

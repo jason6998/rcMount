@@ -15,10 +15,15 @@
       </XPManifest>
       <Icon Value="0"/>
     </General>
+    <i18n>
+      <OutDir Value="po"/>
+    </i18n>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="2"/>
+      <BuildNr Value="2"/>
       <Language Value="0404"/>
+      <CharSet Value="04B0"/>
       <StringTable LegalCopyright="Jason Wang"/>
     </VersionInfo>
     <BuildModes Count="2">

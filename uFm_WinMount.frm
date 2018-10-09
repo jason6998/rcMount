@@ -17,6 +17,7 @@ object Fm_WinMount: TFm_WinMount
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  OnWindowStateChange = FormWindowStateChange
   Position = poScreenCenter
   SessionProperties = 'LV_RVDList.Items'
   ShowHint = True
@@ -621,7 +622,13 @@ object Fm_WinMount: TFm_WinMount
         Name = 'InitMountDIR'
       end    
       item
+        Name = 'RcloneOther'
+      end    
+      item
         Name = 'WinAutoRun'
+      end    
+      item
+        Name = 'RunTrayIcon'
       end>
     OnSaveProperties = XMLPropStorage1SaveProperties
     OnRestoreProperties = XMLPropStorage1RestoreProperties

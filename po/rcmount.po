@@ -1,0 +1,59 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tfm_winmount.btn_add.caption
+msgid "加入"
+msgstr ""
+
+#: tfm_winmount.btn_exit.caption
+msgctxt "tfm_winmount.btn_exit.caption"
+msgid "離開"
+msgstr ""
+
+#: tfm_winmount.btn_mount.caption
+msgid "掛載"
+msgstr ""
+
+#: tfm_winmount.btn_remove.caption
+msgid "移除"
+msgstr ""
+
+#: tfm_winmount.btn_setup.caption
+msgid "設定"
+msgstr ""
+
+#: tfm_winmount.btn_unmount.caption
+msgid "卸載"
+msgstr ""
+
+#: tfm_winmount.caption
+msgctxt "tfm_winmount.caption"
+msgid "rclone 虛擬磁碟管理"
+msgstr ""
+
+#: tfm_winmount.label1.caption
+msgctxt "tfm_winmount.label1.caption"
+msgid "rclone 虛擬磁碟管理"
+msgstr ""
+
+#: tfm_winmount.lv_rvdlist.columns[0].caption
+msgid "S"
+msgstr ""
+
+#: tfm_winmount.lv_rvdlist.columns[1].caption
+msgid "Remote"
+msgstr ""
+
+#: tfm_winmount.lv_rvdlist.columns[2].caption
+msgid "Local Path"
+msgstr ""
+
+#: tfm_winmount.n_winclose.caption
+msgctxt "tfm_winmount.n_winclose.caption"
+msgid "離開"
+msgstr ""
+
+#: tfm_winmount.n_winshow.caption
+msgid "顯示主視窗"
+msgstr ""
+

@@ -44,6 +44,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormWindowStateChange(Sender: TObject);
     procedure LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure N_WinCloseClick(Sender: TObject);
@@ -55,8 +56,10 @@ type
   private
     rcloneFile :String;
     InitMountDIR :String;
-    CloseNeeded :Boolean;
+    RcloneOther :string;
     WinAutoRun :Boolean;
+    RunTrayIcon :Boolean;
+    CloseNeeded :Boolean;
     FirstShow :Boolean;
     function ItemToMountCMD(aItem: TListItem;Execute:Boolean=False):TAsyncProcess;
     function RcloneFileExists(Message:Boolean=True):Boolean;
@@ -137,6 +140,7 @@ begin
   try
     Fm_AddRVD.InitMountDIR := InitMountDIR;
     Fm_AddRVD.rcloneFile:=rcloneFile;
+    Fm_AddRVD.mo_RcloneOther.Text:=RcloneOther;
     if Fm_AddRVD.ShowModal=mrok then
     begin
       aItem := LV_RVDList.Items.Add;
@@ -154,7 +158,7 @@ begin
         ss := ss+' '+'--allow-root';
       if Fm_AddRVD.ck_AllowNonEmpty.Checked then
         ss := ss+' '+'--allow-non-empty';
-      ss := ss+' '+Fm_AddRVD.Memo_Other.Text;
+      ss := ss+' '+Fm_AddRVD.mo_RcloneOther.Text;
       aItem.SubItems.Add(ss); //2 參數
       if Fm_AddRVD.ck_AutoMount.Checked then
         aItem.SubItems.Add('1')
@@ -223,11 +227,15 @@ begin
   try
     Fm_Setup.File_rclone.Text := rcloneFile;
     Fm_Setup.dir_InitMount.Text := InitMountDIR;
+    Fm_Setup.mo_RcloneOther.Text:=RcloneOther;
     Fm_Setup.ck_WinAutoRun.Checked:=WinAutoRun;
+    Fm_Setup.ck_RunTrayIcon.Checked:=RunTrayIcon;
     if Fm_Setup.ShowModal=mrok then begin
       rcloneFile := Fm_Setup.File_rclone.Text;
       InitMountDIR := Fm_Setup.dir_InitMount.Text;
+      RcloneOther:= Fm_Setup.mo_RcloneOther.Text;
       WinAutoRun := Fm_Setup.ck_WinAutoRun.Checked;
+      RunTrayIcon := Fm_Setup.ck_RunTrayIcon.Checked;
       SetAutoRun;
     end;
   finally
@@ -285,14 +293,25 @@ end;
 procedure TFm_WinMount.FormShow(Sender: TObject);
 var i:Integer;
 begin
-  if FirstShow then
+  if FirstShow then begin
     for i := 0 to LV_RVDList.Items.Count-1 do begin
       if LV_RVDList.Items[i].SubItems[3]='1' then begin
         LV_RVDList.Items[i].Data := ItemToMountCMD(LV_RVDList.Items[i],True);     //設定成 MountCMD
         LV_RVDList.Items[i].StateIndex:=1;
       end;
     end;
+    if RunTrayIcon then
+      Hide;
+  end;
   FirstShow:=False;
+end;
+
+procedure TFm_WinMount.FormWindowStateChange(Sender: TObject);
+begin
+  if WindowState=wsMinimized then begin
+    Hide;
+    WindowState:=wsNormal;
+  end;
 end;
 
 procedure TFm_WinMount.LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
@@ -356,7 +375,9 @@ var St: TStringList;
 begin
   rcloneFile := XMLPropStorage1.ReadString('rcloneFile','');
   InitMountDIR := XMLPropStorage1.ReadString('InitMountDIR','');
+  RcloneOther := XMLPropStorage1.ReadString('RcloneOther','');
   WinAutoRun:= XMLPropStorage1.ReadBoolean('WinAutoRun',False);
+  RunTrayIcon:= XMLPropStorage1.ReadBoolean('RunTrayIcon',False);
   St := TStringList.Create;
   try
     XMLPropStorage1.ReadStrings('Items',St,Nil);
@@ -385,7 +406,9 @@ var St: TStringList;
 begin
   XMLPropStorage1.WriteString('rcloneFile',rcloneFile);
   XMLPropStorage1.WriteString('InitMountDIR',InitMountDIR);
+  XMLPropStorage1.WriteString('RcloneOther',RcloneOther);
   XMLPropStorage1.WriteBoolean('WinAutoRun',WinAutoRun);
+  XMLPropStorage1.WriteBoolean('RunTrayIcon',RunTrayIcon);
   St := TStringList.Create;
   try
     ListViewItemToStringList;

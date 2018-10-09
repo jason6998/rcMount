@@ -30,7 +30,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    Memo_Other: TMemo;
+    mo_RcloneOther: TMemo;
     SpeedButton1: TSpeedButton;
     procedure btn_OKClick(Sender: TObject);
     procedure dir_MountPathEnter(Sender: TObject);

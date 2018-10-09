@@ -1,0 +1,15 @@
+{"version":1,"strings":[
+{"hash":80870118,"name":"tfm_winmount.caption","sourcebytes":[114,99,108,111,110,101,32,232,153,155,230,147,172,231,163,129,231,162,159,231,174,161,231,144,134],"value":"rclone \u865B\u64EC\u78C1\u789F\u7BA1\u7406"},
+{"hash":249884149,"name":"tfm_winmount.btn_add.caption","sourcebytes":[229,138,160,229,133,165],"value":"\u52A0\u5165"},
+{"hash":253993780,"name":"tfm_winmount.btn_remove.caption","sourcebytes":[231,167,187,233,153,164],"value":"\u79FB\u9664"},
+{"hash":251176009,"name":"tfm_winmount.btn_mount.caption","sourcebytes":[230,142,155,232,188,137],"value":"\u639B\u8F09"},
+{"hash":250180681,"name":"tfm_winmount.btn_unmount.caption","sourcebytes":[229,141,184,232,188,137],"value":"\u5378\u8F09"},
+{"hash":83,"name":"tfm_winmount.lv_rvdlist.columns[0].caption","sourcebytes":[83],"value":"S"},
+{"hash":93079205,"name":"tfm_winmount.lv_rvdlist.columns[1].caption","sourcebytes":[82,101,109,111,116,101],"value":"Remote"},
+{"hash":132144440,"name":"tfm_winmount.lv_rvdlist.columns[2].caption","sourcebytes":[76,111,99,97,108,32,80,97,116,104],"value":"Local Path"},
+{"hash":255049850,"name":"tfm_winmount.btn_setup.caption","sourcebytes":[232,168,173,229,174,154],"value":"\u8A2D\u5B9A"},
+{"hash":255202027,"name":"tfm_winmount.btn_exit.caption","sourcebytes":[233,155,162,233,150,139],"value":"\u96E2\u958B"},
+{"hash":80870118,"name":"tfm_winmount.label1.caption","sourcebytes":[114,99,108,111,110,101,32,232,153,155,230,147,172,231,163,129,231,162,159,231,174,161,231,144,134],"value":"rclone \u865B\u64EC\u78C1\u789F\u7BA1\u7406"},
+{"hash":135286839,"name":"tfm_winmount.n_winshow.caption","sourcebytes":[233,161,175,231,164,186,228,184,187,232,166,150,231,170,151],"value":"\u986F\u793A\u4E3B\u8996\u7A97"},
+{"hash":255202027,"name":"tfm_winmount.n_winclose.caption","sourcebytes":[233,155,162,233,150,139],"value":"\u96E2\u958B"}
+]}

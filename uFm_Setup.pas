@@ -14,11 +14,14 @@ type
 
   TFm_Setup = class(TForm)
     BtnOK: TBitBtn;
+    ck_RunTrayIcon: TCheckBox;
     ck_WinAutoRun: TCheckBox;
     dir_InitMount: TDirectoryEdit;
     File_rclone: TFileNameEdit;
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
+    mo_RcloneOther: TMemo;
   private
 
   public

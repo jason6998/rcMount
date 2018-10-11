@@ -7,8 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
   Buttons, CustomDrawnControls, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
-  registry, ListViewFilterEdit, vte_json, AbComCtrls, process, XMLConf,
-  UTF8Process, Types;
+  ActnList, registry, ListViewFilterEdit, vte_json, AbComCtrls, process,
+  XMLConf, UTF8Process, UniqueInstance, Types, strutils;
 
 type
 
@@ -17,6 +17,7 @@ type
   TFm_WinMount = class(TForm)
     AsyncProcess1: TAsyncProcess;
     btn_Add: TSpeedButton;
+    btn_Modify: TSpeedButton;
     btn_Exit: TSpeedButton;
     btn_Mount: TSpeedButton;
     btn_Remove: TSpeedButton;
@@ -33,9 +34,11 @@ type
     PopupMenu1: TPopupMenu;
     sb_rcMount: TStatusBar;
     TrayIcon1: TTrayIcon;
+    UniqueInstance1: TUniqueInstance;
     XMLPropStorage1: TXMLPropStorage;
     procedure btn_AddClick(Sender: TObject);
     procedure btn_ExitClick(Sender: TObject);
+    procedure btn_ModifyClick(Sender: TObject);
     procedure btn_MountClick(Sender: TObject);
     procedure btn_RemoveClick(Sender: TObject);
     procedure btn_SetUpClick(Sender: TObject);
@@ -45,6 +48,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
+    procedure LV_RVDListDblClick(Sender: TObject);
     procedure LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
       Selected: Boolean);
     procedure N_WinCloseClick(Sender: TObject);
@@ -63,9 +67,12 @@ type
     FirstShow :Boolean;
     function ItemToMountCMD(aItem: TListItem;Execute:Boolean=False):TAsyncProcess;
     function RcloneFileExists(Message:Boolean=True):Boolean;
+    procedure MountRC(aItem: TListItem);
+    procedure unMountRC(aItem: TListItem);
     procedure SetStateIndex(aItem: TListItem);
     procedure SetBtnEnabled(aItem: TListItem);
     procedure SetAutoRun;
+    procedure AddRVDExecute(Sender: TObject);
   protected
 
   public
@@ -98,11 +105,13 @@ end;
 
 procedure TFm_WinMount.SetBtnEnabled(aItem: TListItem);
 begin
+  btn_Modify.Enabled:=False;
   btn_Remove.Enabled:=False;
   btn_unMount.Enabled:= False;
   btn_Mount.Enabled:= False;
   if not Assigned(aItem) then exit;
   if not aItem.Selected then exit;
+  btn_Modify.Enabled:=True;
   btn_Remove.Enabled:=True;
   if aItem.StateIndex=1 then
     btn_unMount.Enabled:= True
@@ -129,41 +138,60 @@ begin
   end;
 end;
 
-procedure TFm_WinMount.btn_AddClick(Sender: TObject);
-var //vt:TAsyncProcess;
-    aItem: TListItem;
+procedure TFm_WinMount.AddRVDExecute(Sender: TObject);
+var aItem: TListItem;
     ss:String;
+    ipos:Integer;
 begin
-  //加入
+  //加入 or 修改
   if not RcloneFileExists then abort;
+  if (Sender=btn_Modify) then
+    if (not Assigned(LV_RVDList.Selected)) or (not LV_RVDList.Selected.Selected) then abort;
+
   Fm_AddRVD := TFm_AddRVD.Create(self);
   try
     Fm_AddRVD.InitMountDIR := InitMountDIR;
     Fm_AddRVD.rcloneFile:=rcloneFile;
     Fm_AddRVD.mo_RcloneOther.Text:=RcloneOther;
+    Fm_AddRVD.GetRemotes;
+    if (Sender=btn_Modify) then begin
+      aItem := LV_RVDList.Selected;
+      with Fm_AddRVD do begin
+        ipos:=1;
+        cb_rcRemote.Text := ExtractSubstr(aItem.SubItems[0],ipos,[':'])+':';
+        ed_RemotePath.Text := ExtractSubstr(aItem.SubItems[0],ipos,[':']);
+        ss := ExtractWordPos(2,aItem.SubItems[1],[':','/','\'],ipos);
+        if ss='' then
+          cb_LocalDrv.Text := aItem.SubItems[1]
+        else
+          dir_MountPath.Text := aItem.SubItems[1];
+        cb_CacheMode.Text := aItem.SubItems[2];
+        mo_RcloneOther.Text := aItem.SubItems[3];
+        ck_AutoMount.Checked := StrToBool(aItem.SubItems[4]);
+      end;
+    end;
+
     if Fm_AddRVD.ShowModal=mrok then
     begin
-      aItem := LV_RVDList.Items.Add;
+      if (Sender=btn_Add) then
+        aItem := LV_RVDList.Items.Add
+      else begin
+        unMountRC(aItem);
+        aItem.SubItems.Clear;
+      end;
       aItem.Caption:= '';
-      aItem.SubItems.Add(Fm_AddRVD.cb_rcRemote.Text+Fm_AddRVD.ed_RemotePath.Text);  //0 RemotePath
+      aItem.SubItems.Add(Fm_AddRVD.cb_rcRemote.Text+Fm_AddRVD.ed_RemotePath.Text);  //0 Remote Path
       if Fm_AddRVD.cb_LocalDrv.ItemIndex>0 then
-        aItem.SubItems.Add(Fm_AddRVD.cb_LocalDrv.Text)   //1 LocalDrv
+        aItem.SubItems.Add(Fm_AddRVD.cb_LocalDrv.Text)   //1 Local Drive
       else
         aItem.SubItems.Add(Fm_AddRVD.dir_MountPath.Text); //1 MountPath
 
-      ss := Fm_AddRVD.cb_CacheMode.Text;
-      if Fm_AddRVD.ck_AllowOther.Checked then
-        ss := ss+' '+'--allow-other';
-      if Fm_AddRVD.ck_AllowRoot.Checked then
-        ss := ss+' '+'--allow-root';
-      if Fm_AddRVD.ck_AllowNonEmpty.Checked then
-        ss := ss+' '+'--allow-non-empty';
-      ss := ss+' '+Fm_AddRVD.mo_RcloneOther.Text;
-      aItem.SubItems.Add(ss); //2 參數
+      aItem.SubItems.Add(Fm_AddRVD.cb_CacheMode.Text);  //2 CacheMode
+      aItem.SubItems.Add(Fm_AddRVD.mo_RcloneOther.Text); //3 參數
       if Fm_AddRVD.ck_AutoMount.Checked then
         aItem.SubItems.Add('1')
       else
-        aItem.SubItems.Add('0');  //3
+        aItem.SubItems.Add('0');  //4 Auto Mount
       aItem.Data :=ItemToMountCMD(aItem,True);
       aItem.StateIndex:=1;
     end;
@@ -188,34 +216,35 @@ begin
   close;
 end;
 
+procedure TFm_WinMount.btn_ModifyClick(Sender: TObject);
+begin
+  if not Assigned(LV_RVDList.Selected) then abort;
+  unMountRC(LV_RVDList.Selected);
+  AddRVDExecute(Sender);
+end;
+
+procedure TFm_WinMount.btn_AddClick(Sender: TObject);
+begin
+  AddRVDExecute(Sender);
+end;
+
 procedure TFm_WinMount.btn_MountClick(Sender: TObject);
 var vt:TAsyncProcess;
 begin
   //掛載
   if not RcloneFileExists then abort;
   if not Assigned(LV_RVDList.Selected) then abort;
-  if not Assigned(LV_RVDList.Selected.Data) then
-    LV_RVDList.Selected.Data := ItemToMountCMD(LV_RVDList.Selected);     //設定成 MountCMD
-  vt := TAsyncProcess(LV_RVDList.Selected.Data);
-  if not vt.Running then
-    vt.Execute;
-  LV_RVDList.Selected.StateIndex:=1;
+  MountRC(LV_RVDList.Selected);
   SetBtnEnabled(LV_RVDList.Selected);
 end;
 
 procedure TFm_WinMount.btn_RemoveClick(Sender: TObject);
-var vt:TAsyncProcess;
 begin
   //移除
   if not Assigned(LV_RVDList.Selected) then abort;
   if MessageDlg('您確定要移除嗎?', mtConfirmation, [mbYes, mbNo],0,mbNo) = mrNo then
     abort;
-  if Assigned(LV_RVDList.Selected.Data) then begin
-    vt := TAsyncProcess(LV_RVDList.Selected.Data);
-    if vt.Running then
-      vt.Terminate(0);
-    FreeAndNil(vt);
-  end;
+  unMountRC(LV_RVDList.Selected);
   LV_RVDList.Items[LV_RVDList.ItemIndex].Delete;
   SetBtnEnabled(LV_RVDList.Selected);
 end;
@@ -227,7 +256,8 @@ begin
   try
     Fm_Setup.File_rclone.Text := rcloneFile;
     Fm_Setup.dir_InitMount.Text := InitMountDIR;
-    Fm_Setup.mo_RcloneOther.Text:=RcloneOther;
+    if Trim(RcloneOther)<>'' then
+      Fm_Setup.mo_RcloneOther.Text:=RcloneOther;
     Fm_Setup.ck_WinAutoRun.Checked:=WinAutoRun;
     Fm_Setup.ck_RunTrayIcon.Checked:=RunTrayIcon;
     if Fm_Setup.ShowModal=mrok then begin
@@ -244,16 +274,10 @@ begin
 end;
 
 procedure TFm_WinMount.btn_unMountClick(Sender: TObject);
-var vt:TAsyncProcess;
 begin
   //卸載
   if not Assigned(LV_RVDList.Selected) then abort;
-  if Assigned(LV_RVDList.Selected.Data) then begin
-    vt := TAsyncProcess(LV_RVDList.Selected.Data);
-    if vt.Running then
-      vt.Terminate(0);
-    LV_RVDList.Selected.StateIndex:=0;
-  end;
+  unMountRC(LV_RVDList.Selected);
   SetBtnEnabled(LV_RVDList.Selected);
 end;
 
@@ -278,15 +302,9 @@ end;
 
 procedure TFm_WinMount.FormDestroy(Sender: TObject);
 var i:Integer;
-    vt:TAsyncProcess;
 begin
-  for i := 0 to LV_RVDList.Items.Count-1 do begin
-    if not Assigned(LV_RVDList.Items[i].Data) then Continue;
-    vt := TAsyncProcess(LV_RVDList.Items[i].Data);
-    //if vt.Running then
-      vt.Terminate(0);
-    FreeAndNil(vt);
-  end;
+  for i := 0 to LV_RVDList.Items.Count-1 do
+    unMountRC(LV_RVDList.Items[i]);
   XMLPropStorage1.Save;
 end;
 
@@ -295,7 +313,7 @@ var i:Integer;
 begin
   if FirstShow then begin
     for i := 0 to LV_RVDList.Items.Count-1 do begin
-      if LV_RVDList.Items[i].SubItems[3]='1' then begin
+      if LV_RVDList.Items[i].SubItems[4]='1' then begin
         LV_RVDList.Items[i].Data := ItemToMountCMD(LV_RVDList.Items[i],True);     //設定成 MountCMD
         LV_RVDList.Items[i].StateIndex:=1;
       end;
@@ -314,12 +332,22 @@ begin
   end;
 end;
 
+procedure TFm_WinMount.LV_RVDListDblClick(Sender: TObject);
+begin
+  if (not Assigned(LV_RVDList.Selected)) or (not LV_RVDList.Selected.Selected) then abort;
+  if LV_RVDList.Selected.StateIndex = 1 then
+    unMountRC(LV_RVDList.Selected)
+  else
+    MountRC(LV_RVDList.Selected);
+end;
+
 procedure TFm_WinMount.LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
   Selected: Boolean);
 begin
   if Selected then begin
     SetStateIndex(Item);
-    sb_rcMount.SimpleText:='rclone mount '+Item.SubItems[0]+' '+Item.SubItems[1]+' '+Item.SubItems[2];
+    sb_rcMount.SimpleText:='rclone mount '+Item.SubItems[0]+' '+Item.SubItems[1]
+                           +' '+Item.SubItems[2]+' '+Item.SubItems[3] ;
   end else
     sb_rcMount.SimpleText:='';
   SetBtnEnabled(Item);
@@ -429,12 +457,11 @@ begin
     Result.Parameters.Add('mount');
     Result.Parameters.Add(aItem.SubItems[0]); //Remote
     Result.Parameters.Add(aItem.SubItems[1]); //Local Driver or Path
-    CommandToList(aItem.SubItems[2],aParameters); //其他參數
+    CommandToList(aItem.SubItems[2]+' '+aItem.SubItems[3],aParameters); //其他參數
     Result.Parameters.AddStrings(aParameters);
     Result.ShowWindow := swoHIDE;
-    //Result.Options := Result.Options + [poWaitOnExit]; //不可設定
     if Execute then
-      Result.Execute;
+      try Result.Execute; except end;
   finally
     FreeAndNil(aParameters);
   end;
@@ -447,6 +474,33 @@ begin
     Result := False;
     if Message then
       ShowMessage('請先設定 rclone 執行檔的資料夾位置!');
+  end;
+end;
+
+procedure TFm_WinMount.MountRC(aItem: TListItem);
+var vt:TAsyncProcess;
+begin
+  //掛載
+  if not RcloneFileExists then abort;
+  if not Assigned(aItem) then abort;
+  if not Assigned(aItem.Data) then
+    aItem.Data := ItemToMountCMD(aItem);     //設定成 MountCMD
+  vt := TAsyncProcess(aItem.Data);
+  try vt.Active:=True; except end;
+  aItem.StateIndex:=1;
+end;
+
+procedure TFm_WinMount.unMountRC(aItem: TListItem);
+var vt:TAsyncProcess;
+begin
+  //卸載
+  if not Assigned(aItem) then abort;
+  if Assigned(aItem.Data) then begin
+    vt := TAsyncProcess(aItem.Data);
+    try vt.Active:=False; except end;
+    vt.Free;
+    aItem.Data :=Nil;
+    aItem.StateIndex:=0;
   end;
 end;
 

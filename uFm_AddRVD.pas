@@ -16,9 +16,6 @@ type
     btn_OK: TBitBtn;
     btn_Cancel: TBitBtn;
     ck_AutoMount: TCheckBox;
-    ck_AllowOther: TCheckBox;
-    ck_AllowNonEmpty: TCheckBox;
-    ck_AllowRoot: TCheckBox;
     cb_LocalDrv: TComboBox;
     cb_CacheMode: TComboBox;
     dir_MountPath: TDirectoryEdit;
@@ -35,14 +32,15 @@ type
     procedure btn_OKClick(Sender: TObject);
     procedure dir_MountPathEnter(Sender: TObject);
     procedure ECCSpeedBtnClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
   private
-    procedure GetRemotes;
+
   public
     rcloneFile :String;
     InitMountDIR :String;
     //MountCMD: TAsyncProcess;
+    procedure GetRemotes;
   end;
 
 var
@@ -86,9 +84,9 @@ begin
   GetRemotes;
 end;
 
-procedure TFm_AddRVD.FormShow(Sender: TObject);
+procedure TFm_AddRVD.FormCreate(Sender: TObject);
 begin
-  GetRemotes;
+    //GetRemotes;
 end;
 
 procedure TFm_AddRVD.SpeedButton1Click(Sender: TObject);
@@ -113,8 +111,10 @@ end;
 procedure TFm_AddRVD.GetRemotes;
 var aStt: TStringList;
     t:TProcessUTF8;
+    ss:String;
 begin
   //RunCommand(rcloneFile,['listremotes'],ss,[swoHIDE]);
+  ss := cb_rcRemote.Text;
   t:= TProcessUTF8.Create(NIL);
   aStt := TStringList.Create;
   try
@@ -126,6 +126,7 @@ begin
     aStt.LoadFromStream(t.Output);
     cb_rcRemote.Clear;
     cb_rcRemote.Items.AddStrings(aStt);
+    cb_rcRemote.ItemIndex := cb_rcRemote.Items.IndexOf(ss);
   finally
     t.Free;
     aStt.Free;

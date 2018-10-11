@@ -21,6 +21,7 @@
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="2"/>
+      <MinorVersionNr Value="1"/>
       <BuildNr Value="2"/>
       <Language Value="0404"/>
       <CharSet Value="04B0"/>
@@ -76,28 +77,31 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <RequiredPackages Count="7">
+    <RequiredPackages Count="8">
       <Item1>
-        <PackageName Value="pl_eccontrols"/>
+        <PackageName Value="pl_luicontrols"/>
       </Item1>
       <Item2>
-        <PackageName Value="bs_Utils"/>
+        <PackageName Value="pl_eccontrols"/>
       </Item2>
       <Item3>
-        <PackageName Value="adFCL"/>
+        <PackageName Value="bs_Utils"/>
       </Item3>
       <Item4>
-        <PackageName Value="pl_virtualtreesextra"/>
+        <PackageName Value="adFCL"/>
       </Item4>
       <Item5>
-        <PackageName Value="pl_abbrevia"/>
+        <PackageName Value="pl_virtualtreesextra"/>
       </Item5>
       <Item6>
-        <PackageName Value="bs_Controls"/>
+        <PackageName Value="pl_abbrevia"/>
       </Item6>
       <Item7>
-        <PackageName Value="adLCL"/>
+        <PackageName Value="bs_Controls"/>
       </Item7>
+      <Item8>
+        <PackageName Value="adLCL"/>
+      </Item8>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

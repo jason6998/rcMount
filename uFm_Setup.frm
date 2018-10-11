@@ -1,11 +1,11 @@
 object Fm_Setup: TFm_Setup
   Left = 348
-  Height = 354
+  Height = 399
   Top = 220
   Width = 499
   BorderStyle = bsDialog
   Caption = '設定'
-  ClientHeight = 354
+  ClientHeight = 399
   ClientWidth = 499
   Font.CharSet = CHINESEBIG5_CHARSET
   Font.Color = clBlack
@@ -57,7 +57,7 @@ object Fm_Setup: TFm_Setup
   object BtnOK: TBitBtn
     Left = 200
     Height = 30
-    Top = 314
+    Top = 351
     Width = 75
     Caption = '&確定'
     Default = True
@@ -68,7 +68,7 @@ object Fm_Setup: TFm_Setup
   object ck_WinAutoRun: TCheckBox
     Left = 19
     Height = 24
-    Top = 248
+    Top = 288
     Width = 217
     Caption = '在Windows啟動時自動執行'
     TabOrder = 3
@@ -76,7 +76,7 @@ object Fm_Setup: TFm_Setup
   object ck_RunTrayIcon: TCheckBox
     Left = 19
     Height = 24
-    Top = 275
+    Top = 315
     Width = 212
     Caption = '程式啟動後縮小至系統圖示'
     TabOrder = 4
@@ -91,9 +91,14 @@ object Fm_Setup: TFm_Setup
   end
   object mo_RcloneOther: TMemo
     Left = 19
-    Height = 67
+    Height = 107
     Top = 173
     Width = 451
+    Lines.Strings = (
+      '--allow-other'
+      '--allow-root'
+      '--allow-non-empty'
+    )
     TabOrder = 5
   end
 end

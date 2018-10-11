@@ -13,23 +13,31 @@ object Fm_AddRVD: TFm_AddRVD
   Font.Name = 'Microsoft JhengHei UI'
   Font.Pitch = fpVariable
   Font.Quality = fqDraft
-  OnShow = FormShow
+  OnCreate = FormCreate
   Position = poMainFormCenter
   LCLVersion = '6.4'
   object Label1: TLabel
     Left = 9
-    Height = 20
+    Height = 26
     Top = 13
-    Width = 132
-    Caption = '新建虛擬磁碟設置:'
+    Width = 173
+    Caption = '遠端虛擬磁碟設置:'
+    Font.CharSet = CHINESEBIG5_CHARSET
+    Font.Color = clBlack
+    Font.Height = -21
+    Font.Name = 'Microsoft JhengHei UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
     ParentColor = False
+    ParentFont = False
   end
   object Label2: TLabel
     Left = 9
     Height = 20
     Top = 51
-    Width = 117
-    Caption = 'rclone Remotes'
+    Width = 121
+    Caption = 'Rclone Remotes'
     ParentColor = False
   end
   object ed_RemotePath: TEdit
@@ -113,32 +121,12 @@ object Fm_AddRVD: TFm_AddRVD
     Default = True
     Kind = bkOK
     OnClick = btn_OKClick
-    TabOrder = 9
-  end
-  object ck_AllowOther: TCheckBox
-    Left = 9
-    Height = 24
-    Top = 347
-    Width = 121
-    Caption = '--allow-other'
-    Checked = True
-    State = cbChecked
-    TabOrder = 5
-  end
-  object ck_AllowNonEmpty: TCheckBox
-    Left = 297
-    Height = 24
-    Top = 347
-    Width = 165
-    Caption = '--allow-non-empty'
-    Checked = True
-    State = cbChecked
-    TabOrder = 7
+    TabOrder = 6
   end
   object cb_CacheMode: TComboBox
     Left = 9
     Height = 28
-    Top = 310
+    Top = 307
     Width = 261
     ItemHeight = 20
     ItemIndex = 2
@@ -152,30 +140,20 @@ object Fm_AddRVD: TFm_AddRVD
     TabOrder = 4
     Text = '--vfs-cache-mode writes'
   end
-  object ck_AllowRoot: TCheckBox
-    Left = 154
-    Height = 24
-    Top = 347
-    Width = 112
-    Caption = '--allow-root'
-    Checked = True
-    State = cbChecked
-    TabOrder = 6
-  end
   object Label5: TLabel
     Left = 9
     Height = 20
-    Top = 386
+    Top = 347
     Width = 64
     Caption = '其他參數'
     ParentColor = False
   end
   object mo_RcloneOther: TMemo
     Left = 8
-    Height = 75
-    Top = 411
+    Height = 140
+    Top = 368
     Width = 528
-    TabOrder = 8
+    TabOrder = 5
   end
   object btn_Cancel: TBitBtn
     Left = 277
@@ -186,15 +164,15 @@ object Fm_AddRVD: TFm_AddRVD
     Caption = '取消'
     Kind = bkCancel
     ModalResult = 2
-    TabOrder = 10
+    TabOrder = 7
   end
   object ck_AutoMount: TCheckBox
     Left = 11
     Height = 24
-    Top = 496
+    Top = 511
     Width = 132
     Caption = '啟動時自動掛載'
-    TabOrder = 11
+    TabOrder = 8
   end
   object SpeedButton1: TSpeedButton
     Left = 403

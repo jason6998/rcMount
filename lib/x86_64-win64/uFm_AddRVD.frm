@@ -2,11 +2,11 @@ object Fm_AddRVD: TFm_AddRVD
   Left = 348
   Height = 589
   Top = 220
-  Width = 556
+  Width = 548
   BorderStyle = bsDialog
   Caption = '新建虛擬磁碟'
   ClientHeight = 589
-  ClientWidth = 556
+  ClientWidth = 548
   Font.CharSet = CHINESEBIG5_CHARSET
   Font.Color = clBlack
   Font.Height = -16
@@ -35,7 +35,7 @@ object Fm_AddRVD: TFm_AddRVD
   object Label2: TLabel
     Left = 9
     Height = 20
-    Top = 51
+    Top = 108
     Width = 121
     Caption = 'Rclone Remotes'
     ParentColor = False
@@ -43,49 +43,47 @@ object Fm_AddRVD: TFm_AddRVD
   object ed_RemotePath: TEdit
     Left = 8
     Height = 28
-    Top = 136
+    Top = 186
     Width = 279
-    TabOrder = 1
+    TabOrder = 2
     Text = '/'
   end
   object dir_MountPath: TDirectoryEdit
     Left = 9
     Height = 28
-    Top = 264
+    Top = 288
     Width = 527
     ShowHidden = False
     ButtonWidth = 23
     NumGlyphs = 1
     MaxLength = 0
-    TabOrder = 3
-    OnEnter = dir_MountPathEnter
+    TabOrder = 4
   end
   object Label3: TLabel
     Left = 9
     Height = 20
-    Top = 243
-    Width = 160
-    Caption = '本地虛擬磁碟掛載目錄'
+    Top = 268
+    Width = 144
+    Caption = '掛載磁碟資料夾位置'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 9
     Height = 20
-    Top = 173
-    Width = 160
-    Caption = '本地虛擬磁碟掛載代號'
+    Top = 238
+    Width = 112
+    Caption = '掛載磁碟代號：'
     ParentColor = False
   end
   object cb_LocalDrv: TComboBox
-    Left = 9
+    Left = 127
     Height = 28
-    Top = 198
-    Width = 81
+    Top = 234
+    Width = 233
     ItemHeight = 20
     ItemIndex = 0
     Items.Strings = (
-      '不使用'
-      'D:'
+      '不使用，請掛載成虛擬資料夾'
       'E:'
       'F:'
       'G:'
@@ -109,8 +107,8 @@ object Fm_AddRVD: TFm_AddRVD
       'Z:'
     )
     Style = csDropDownList
-    TabOrder = 2
-    Text = '不使用'
+    TabOrder = 3
+    Text = '不使用，請掛載成虛擬資料夾'
   end
   object btn_OK: TBitBtn
     Left = 154
@@ -121,12 +119,12 @@ object Fm_AddRVD: TFm_AddRVD
     Default = True
     Kind = bkOK
     OnClick = btn_OKClick
-    TabOrder = 6
+    TabOrder = 8
   end
   object cb_CacheMode: TComboBox
     Left = 9
     Height = 28
-    Top = 307
+    Top = 374
     Width = 261
     ItemHeight = 20
     ItemIndex = 2
@@ -137,23 +135,23 @@ object Fm_AddRVD: TFm_AddRVD
       '--vfs-cache-mode full'
     )
     Style = csDropDownList
-    TabOrder = 4
+    TabOrder = 5
     Text = '--vfs-cache-mode writes'
   end
   object Label5: TLabel
-    Left = 9
+    Left = 11
     Height = 20
-    Top = 347
+    Top = 409
     Width = 64
     Caption = '其他參數'
     ParentColor = False
   end
   object mo_RcloneOther: TMemo
     Left = 8
-    Height = 140
-    Top = 368
+    Height = 100
+    Top = 433
     Width = 528
-    TabOrder = 5
+    TabOrder = 6
   end
   object btn_Cancel: TBitBtn
     Left = 277
@@ -164,20 +162,20 @@ object Fm_AddRVD: TFm_AddRVD
     Caption = '取消'
     Kind = bkCancel
     ModalResult = 2
-    TabOrder = 7
+    TabOrder = 9
   end
   object ck_AutoMount: TCheckBox
-    Left = 11
+    Left = 376
     Height = 24
-    Top = 511
+    Top = 72
     Width = 132
     Caption = '啟動時自動掛載'
-    TabOrder = 8
+    TabOrder = 7
   end
   object SpeedButton1: TSpeedButton
     Left = 403
     Height = 33
-    Top = 74
+    Top = 127
     Width = 105
     Caption = 'rc config'
     OnClick = SpeedButton1Click
@@ -185,21 +183,52 @@ object Fm_AddRVD: TFm_AddRVD
   object cb_rcRemote: TECComboBtn
     Left = 9
     Height = 28
-    Top = 76
+    Top = 129
     Width = 335
     Button.Width = 40
     Button.GlyphDesign = egdArrsB_UU
     Button.OnClick = ECCSpeedBtnClick
     ItemHeight = 20
     Style = csDropDownList
-    TabOrder = 0
+    TabOrder = 1
   end
   object Label6: TLabel
     Left = 7
     Height = 20
-    Top = 113
+    Top = 166
     Width = 80
     Caption = '遠端資料夾'
     ParentColor = False
+  end
+  object Label7: TLabel
+    Left = 11
+    Height = 20
+    Top = 52
+    Width = 64
+    Caption = '標籤名稱'
+    ParentColor = False
+  end
+  object ed_RVDName: TEdit
+    Left = 11
+    Height = 28
+    Top = 72
+    Width = 229
+    TabOrder = 0
+  end
+  object Label8: TLabel
+    Left = 7
+    Height = 20
+    Top = 328
+    Width = 128
+    Caption = '虛擬資料夾名稱：'
+    ParentColor = False
+  end
+  object ed_MountName: TEdit
+    Left = 136
+    Height = 28
+    Top = 325
+    Width = 224
+    OnEnter = ed_MountNameEnter
+    TabOrder = 10
   end
 end

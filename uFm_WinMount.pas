@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
   Buttons, CustomDrawnControls, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
   ActnList, registry, ListViewFilterEdit, vte_json, AbComCtrls, process,
-  XMLConf, UTF8Process, UniqueInstance, Types, strutils;
+  XMLConf, UTF8Process, TplStatusBarUnit, FZCommon, cyStatusBar, cyStaticText,
+  UniqueInstance, MenuButton, Types, strutils;
 
 type
 
@@ -17,8 +18,8 @@ type
   TFm_WinMount = class(TForm)
     AsyncProcess1: TAsyncProcess;
     btn_Add: TSpeedButton;
-    btn_Modify: TSpeedButton;
     btn_Exit: TSpeedButton;
+    btn_Modify: TSpeedButton;
     btn_Mount: TSpeedButton;
     btn_Remove: TSpeedButton;
     btn_SetUp: TSpeedButton;
@@ -26,13 +27,14 @@ type
     ImageList1: TImageList;
     Label1: TLabel;
     LV_RVDList: TListView;
+    sb_rcMount: TMemo;
     N_WinShow: TMenuItem;
     N_WinClose: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     PopupMenu1: TPopupMenu;
-    sb_rcMount: TStatusBar;
     TrayIcon1: TTrayIcon;
     UniqueInstance1: TUniqueInstance;
     XMLPropStorage1: TXMLPropStorage;
@@ -71,6 +73,7 @@ type
     procedure unMountRC(aItem: TListItem);
     procedure SetStateIndex(aItem: TListItem);
     procedure SetBtnEnabled(aItem: TListItem);
+    procedure SetMountCMDText(aItem: TListItem);
     procedure SetAutoRun;
     procedure AddRVDExecute(Sender: TObject);
   protected
@@ -119,6 +122,12 @@ begin
     btn_Mount.Enabled:= True;
 end;
 
+procedure TFm_WinMount.SetMountCMDText(aItem: TListItem);
+begin
+  sb_rcMount.Text:='rclone mount '+aItem.SubItems[0]+' '+aItem.SubItems[1]
+                         +' '+aItem.SubItems[2]+' '+aItem.SubItems[3] ;
+end;
+
 procedure TFm_WinMount.SetAutoRun;
 var Reg: TRegistry;
 begin
@@ -141,7 +150,7 @@ end;
 procedure TFm_WinMount.AddRVDExecute(Sender: TObject);
 var aItem: TListItem;
     ss:String;
-    ipos:Integer;
+    ii:Integer;
 begin
   //加入 or 修改
   if not RcloneFileExists then abort;
@@ -150,21 +159,25 @@ begin
 
   Fm_AddRVD := TFm_AddRVD.Create(self);
   try
-    Fm_AddRVD.InitMountDIR := InitMountDIR;
+    //Fm_AddRVD.InitMountDIR := InitMountDIR;
     Fm_AddRVD.rcloneFile:=rcloneFile;
     Fm_AddRVD.mo_RcloneOther.Text:=RcloneOther;
+    Fm_AddRVD.dir_MountPath.Text:=InitMountDIR;
     Fm_AddRVD.GetRemotes;
     if (Sender=btn_Modify) then begin
       aItem := LV_RVDList.Selected;
       with Fm_AddRVD do begin
-        ipos:=1;
-        cb_rcRemote.Text := ExtractSubstr(aItem.SubItems[0],ipos,[':'])+':';
-        ed_RemotePath.Text := ExtractSubstr(aItem.SubItems[0],ipos,[':']);
-        ss := ExtractWordPos(2,aItem.SubItems[1],[':','/','\'],ipos);
+        ii:=1;
+        ed_RVDName.Text:=aItem.Caption;
+        cb_rcRemote.Text := ExtractSubstr(aItem.SubItems[0],ii,[':'])+':';
+        ed_RemotePath.Text := ExtractSubstr(aItem.SubItems[0],ii,[':']);
+        ss := ExtractWord(2,aItem.SubItems[1],[':','/','\']); //取得磁碟之後的path
         if ss='' then
           cb_LocalDrv.Text := aItem.SubItems[1]
-        else
-          dir_MountPath.Text := aItem.SubItems[1];
+        else begin
+          dir_MountPath.Text := ExtractFileDir(aItem.SubItems[1]);
+          ed_MountName.Text := ExtractFileName(aItem.SubItems[1]);
+        end;
         cb_CacheMode.Text := aItem.SubItems[2];
         mo_RcloneOther.Text := aItem.SubItems[3];
         ck_AutoMount.Checked := StrToBool(aItem.SubItems[4]);
@@ -179,12 +192,12 @@ begin
         unMountRC(aItem);
         aItem.SubItems.Clear;
       end;
-      aItem.Caption:= '';
+      aItem.Caption:= Fm_AddRVD.ed_RVDName.Text {''};
       aItem.SubItems.Add(Fm_AddRVD.cb_rcRemote.Text+Fm_AddRVD.ed_RemotePath.Text);  //0 Remote Path
       if Fm_AddRVD.cb_LocalDrv.ItemIndex>0 then
         aItem.SubItems.Add(Fm_AddRVD.cb_LocalDrv.Text)   //1 Local Drive
       else
-        aItem.SubItems.Add(Fm_AddRVD.dir_MountPath.Text); //1 MountPath
+        aItem.SubItems.Add(Fm_AddRVD.dir_MountPath.Text+'/'+Fm_AddRVD.ed_MountName.Text); //1 MountPath
 
       aItem.SubItems.Add(Fm_AddRVD.cb_CacheMode.Text);  //2 CacheMode
       aItem.SubItems.Add(Fm_AddRVD.mo_RcloneOther.Text); //3 參數
@@ -194,6 +207,7 @@ begin
         aItem.SubItems.Add('0');  //4 Auto Mount
       aItem.Data :=ItemToMountCMD(aItem,True);
       aItem.StateIndex:=1;
+      SetMountCMDText(aItem);
     end;
   finally
     FreeAndNil(Fm_AddRVD);
@@ -212,8 +226,7 @@ end;
 
 procedure TFm_WinMount.btn_ExitClick(Sender: TObject);
 begin
-  CloseNeeded := True;
-  close;
+  Hide;
 end;
 
 procedure TFm_WinMount.btn_ModifyClick(Sender: TObject);
@@ -283,11 +296,16 @@ end;
 
 procedure TFm_WinMount.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
+var ii:integer;
 begin
    if CloseNeeded then
      CloseAction := caFree
-   else
-     CloseAction := caHide;
+   else begin
+     ii:=QuestionDlg('警告','您確定要離開程式或隱藏視窗？',mtWarning,[mrYes,'離開',mrNo,'隱藏',mrCancel,'放棄'],0);
+     if ii=mrYes then CloseAction := caFree
+     else if ii=mrNo then CloseAction := caHide
+     else abort;
+   end;
 end;
 
 procedure TFm_WinMount.FormCreate(Sender: TObject);
@@ -346,10 +364,9 @@ procedure TFm_WinMount.LV_RVDListSelectItem(Sender: TObject; Item: TListItem;
 begin
   if Selected then begin
     SetStateIndex(Item);
-    sb_rcMount.SimpleText:='rclone mount '+Item.SubItems[0]+' '+Item.SubItems[1]
-                           +' '+Item.SubItems[2]+' '+Item.SubItems[3] ;
+    SetMountCMDText(Item);
   end else
-    sb_rcMount.SimpleText:='';
+    sb_rcMount.Text:='';
   SetBtnEnabled(Item);
 end;
 
@@ -423,8 +440,8 @@ var St: TStringList;
     i, j: Integer;
   begin
     for i := 0 to LV_RVDList.Items.Count-1 do begin
-      ss := ''+#9;
-      //ss := LV_RVDList.Items[i].Caption + #9;
+      //ss := ''+#9;
+      ss := LV_RVDList.Items[i].Caption + #9;
       for j := 0 to LV_RVDList.Items[i].SubItems.Count-1 do
         ss := ss + LV_RVDList.Items[i].SubItems[j] + #9;
       St.Add(System.Copy(ss, 1, Length(ss)-1));//remove trailing tab

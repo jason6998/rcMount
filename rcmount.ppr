@@ -13,7 +13,7 @@ uses
 {$R *.res}
 
 begin
-  Application.Title:='rclone 虛擬磁碟掛載管理';
+  Application.Title:='RCMount 虛擬磁碟管理 for Rclone';
   RequireDerivedFormResource:=True;
   Application.Scaled:=True;
   Application.Initialize;

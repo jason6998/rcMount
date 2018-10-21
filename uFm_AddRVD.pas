@@ -20,6 +20,8 @@ type
     cb_CacheMode: TComboBox;
     dir_MountPath: TDirectoryEdit;
     cb_rcRemote: TECComboBtn;
+    ed_MountName: TEdit;
+    ed_RVDName: TEdit;
     ed_RemotePath: TEdit;
     Label1: TLabel;
     Label2: TLabel;
@@ -27,11 +29,13 @@ type
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
     mo_RcloneOther: TMemo;
     SpeedButton1: TSpeedButton;
     procedure btn_OKClick(Sender: TObject);
-    procedure dir_MountPathEnter(Sender: TObject);
     procedure ECCSpeedBtnClick(Sender: TObject);
+    procedure ed_MountNameEnter(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
   private
@@ -61,9 +65,11 @@ begin
     abort;
   end;
   if (cb_LocalDrv.ItemIndex=0) then begin
-    aDir := ExtractFileDir(dir_MountPath.Text);
-    if ((aDir<>'') and (not DirectoryExists(aDir))) or (DirectoryExists(dir_MountPath.Text)) then begin
-      MessageDlg('本地虛擬磁碟掛載目錄輸入部正確!請重新設置。', mtError, [mbOK],0);
+    //如果未設定掛載磁碟
+    aDir := dir_MountPath.Text+'/'+ed_MountName.Text {ExtractFileDir(dir_MountPath.Text)};
+    if (dir_MountPath.Text='') or (ed_MountName.Text='') or (not DirectoryExists(dir_MountPath.Text))
+       or DirectoryExists(aDir) then begin
+      MessageDlg('掛載磁碟資料夾位置不正確!請重新設置。', mtError, [mbOK],0);
       dir_MountPath.SetFocus;
       abort;
     end;
@@ -71,17 +77,17 @@ begin
   ModalResult:=mrOK;
 end;
 
-procedure TFm_AddRVD.dir_MountPathEnter(Sender: TObject);
-begin
-  //
-  if dir_MountPath.text='' then
-    dir_MountPath.Text:= InitMountDIR+'/'
-    +StringsReplace(cb_rcRemote.Text+ed_RemotePath.Text,[':','/','\'],['','',''],[rfReplaceAll] );
-end;
-
 procedure TFm_AddRVD.ECCSpeedBtnClick(Sender: TObject);
 begin
   GetRemotes;
+end;
+
+procedure TFm_AddRVD.ed_MountNameEnter(Sender: TObject);
+begin
+  //
+  if ed_MountName.text='' then
+    ed_MountName.Text:=StringsReplace(ed_RVDName.Text,['*','?','>','<','|',':','/','\']
+                                      ,['','','','','','','',''],[rfReplaceAll]);
 end;
 
 procedure TFm_AddRVD.FormCreate(Sender: TObject);

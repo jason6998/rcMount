@@ -98,6 +98,7 @@ object Fm_Setup: TFm_Setup
       '--allow-other'
       '--allow-root'
       '--allow-non-empty'
+      '--write-back-cache'
     )
     TabOrder = 5
   end

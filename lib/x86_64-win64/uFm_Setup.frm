@@ -39,8 +39,8 @@ object Fm_Setup: TFm_Setup
     Left = 19
     Height = 20
     Top = 80
-    Width = 176
-    Caption = '雲端磁碟預設掛載的目錄'
+    Width = 272
+    Caption = '遠端空間掛載至本地資料夾的預設位置'
     ParentColor = False
   end
   object dir_InitMount: TDirectoryEdit
@@ -63,7 +63,7 @@ object Fm_Setup: TFm_Setup
     Default = True
     Kind = bkOK
     ModalResult = 1
-    TabOrder = 2
+    TabOrder = 5
   end
   object ck_WinAutoRun: TCheckBox
     Left = 19
@@ -100,6 +100,6 @@ object Fm_Setup: TFm_Setup
       '--allow-non-empty'
       '--write-back-cache'
     )
-    TabOrder = 5
+    TabOrder = 2
   end
 end

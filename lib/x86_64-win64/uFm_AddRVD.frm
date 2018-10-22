@@ -45,7 +45,7 @@ object Fm_AddRVD: TFm_AddRVD
     Height = 28
     Top = 186
     Width = 279
-    TabOrder = 2
+    TabOrder = 3
     Text = '/'
   end
   object dir_MountPath: TDirectoryEdit
@@ -57,7 +57,7 @@ object Fm_AddRVD: TFm_AddRVD
     ButtonWidth = 23
     NumGlyphs = 1
     MaxLength = 0
-    TabOrder = 4
+    TabOrder = 5
   end
   object Label3: TLabel
     Left = 9
@@ -107,7 +107,7 @@ object Fm_AddRVD: TFm_AddRVD
       'Z:'
     )
     Style = csDropDownList
-    TabOrder = 3
+    TabOrder = 4
     Text = '不使用，請掛載成虛擬資料夾'
   end
   object btn_OK: TBitBtn
@@ -119,7 +119,7 @@ object Fm_AddRVD: TFm_AddRVD
     Default = True
     Kind = bkOK
     OnClick = btn_OKClick
-    TabOrder = 8
+    TabOrder = 9
   end
   object cb_CacheMode: TComboBox
     Left = 9
@@ -135,7 +135,7 @@ object Fm_AddRVD: TFm_AddRVD
       '--vfs-cache-mode full'
     )
     Style = csDropDownList
-    TabOrder = 5
+    TabOrder = 7
     Text = '--vfs-cache-mode writes'
   end
   object Label5: TLabel
@@ -151,7 +151,7 @@ object Fm_AddRVD: TFm_AddRVD
     Height = 100
     Top = 433
     Width = 528
-    TabOrder = 6
+    TabOrder = 8
   end
   object btn_Cancel: TBitBtn
     Left = 277
@@ -162,7 +162,7 @@ object Fm_AddRVD: TFm_AddRVD
     Caption = '取消'
     Kind = bkCancel
     ModalResult = 2
-    TabOrder = 9
+    TabOrder = 10
   end
   object ck_AutoMount: TCheckBox
     Left = 376
@@ -170,7 +170,7 @@ object Fm_AddRVD: TFm_AddRVD
     Top = 72
     Width = 132
     Caption = '啟動時自動掛載'
-    TabOrder = 7
+    TabOrder = 1
   end
   object SpeedButton1: TSpeedButton
     Left = 403
@@ -190,7 +190,7 @@ object Fm_AddRVD: TFm_AddRVD
     Button.OnClick = ECCSpeedBtnClick
     ItemHeight = 20
     Style = csDropDownList
-    TabOrder = 1
+    TabOrder = 2
   end
   object Label6: TLabel
     Left = 7
@@ -229,6 +229,6 @@ object Fm_AddRVD: TFm_AddRVD
     Top = 325
     Width = 224
     OnEnter = ed_MountNameEnter
-    TabOrder = 10
+    TabOrder = 6
   end
 end

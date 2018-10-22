@@ -5,11 +5,10 @@ unit uFm_WinMount;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, ComCtrls,
-  Buttons, CustomDrawnControls, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
-  ActnList, registry, ListViewFilterEdit, vte_json, AbComCtrls, process,
-  XMLConf, UTF8Process, TplStatusBarUnit, FZCommon, cyStatusBar, cyStaticText,
-  UniqueInstance, MenuButton, Types, strutils;
+  Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, ComCtrls,
+  Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
+  registry, process,
+  UniqueInstance, strutils;
 
 type
 
@@ -126,6 +125,7 @@ procedure TFm_WinMount.SetMountCMDText(aItem: TListItem);
 begin
   sb_rcMount.Text:='rclone mount '+aItem.SubItems[0]+' '+aItem.SubItems[1]
                          +' '+aItem.SubItems[2]+' '+aItem.SubItems[3] ;
+  sb_rcMount.Hint:=sb_rcMount.Text;
 end;
 
 procedure TFm_WinMount.SetAutoRun;
@@ -365,8 +365,10 @@ begin
   if Selected then begin
     SetStateIndex(Item);
     SetMountCMDText(Item);
-  end else
+  end else begin
     sb_rcMount.Text:='';
+    sb_rcMount.Hint:='';
+  end;
   SetBtnEnabled(Item);
 end;
 

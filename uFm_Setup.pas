@@ -5,7 +5,7 @@ unit uFm_Setup;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, EditBtn,
+  Forms, StdCtrls, EditBtn,
   Buttons;
 
 type

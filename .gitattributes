@@ -1,0 +1,3 @@
+*.frm linguist-language=Pascal
+*.ct* linguist-language=Pascal
+lib/* linguist-generated=true

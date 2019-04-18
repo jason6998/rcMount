@@ -109,6 +109,7 @@ begin
     t.Parameters.Add('config');
     t.Options := t.Options + [poWaitOnExit];
     t.Execute;
+    GetRemotes;
   finally
     t.Free;
   end;

@@ -22,7 +22,7 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="3"/>
+      <BuildNr Value="4"/>
       <Language Value="0404"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="Jason Wang"/>

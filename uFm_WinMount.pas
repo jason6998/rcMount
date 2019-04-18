@@ -208,6 +208,7 @@ begin
       aItem.Data :=ItemToMountCMD(aItem,True);
       aItem.StateIndex:=1;
       SetMountCMDText(aItem);
+      XMLPropStorage1.Save;
     end;
   finally
     FreeAndNil(Fm_AddRVD);
@@ -260,6 +261,7 @@ begin
   unMountRC(LV_RVDList.Selected);
   LV_RVDList.Items[LV_RVDList.ItemIndex].Delete;
   SetBtnEnabled(LV_RVDList.Selected);
+  XMLPropStorage1.Save;
 end;
 
 procedure TFm_WinMount.btn_SetUpClick(Sender: TObject);

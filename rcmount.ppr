@@ -7,13 +7,13 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the adLCL widgetset
-  Forms, uFm_WinMount, uFm_Setup, uFm_AddRVD
+  Forms, uFm_WinMount, uFm_Setup, uFm_AddRVD, uFm_DirTree
   { you can add units after this };
 
 {$R *.res}
 
 begin
-  Application.Title:='RCMount 虛擬磁碟管理 for Rclone';
+  Application.Title:='RCMount';
   RequireDerivedFormResource:=True;
   Application.Scaled:=True;
   Application.Initialize;

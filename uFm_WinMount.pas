@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, ComCtrls,
-  Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
-  registry, process,
+  Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess, PairSplitter,
+  registry, process,LazFileUtils, ksplitter, cySplitter,
   UniqueInstance, strutils;
 
 type
@@ -26,14 +26,16 @@ type
     ImageList1: TImageList;
     Label1: TLabel;
     LV_RVDList: TListView;
-    sb_rcMount: TMemo;
+    Panel_mr: TPanel;
+    Panel4: TPanel;
+    Panel_m: TPanel;
     N_WinShow: TMenuItem;
     N_WinClose: TMenuItem;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
+    Panel_top: TPanel;
+    Panel_topR: TPanel;
     PopupMenu1: TPopupMenu;
+    sb_rcMount: TMemo;
+    Splitter1: TSplitter;
     TrayIcon1: TTrayIcon;
     UniqueInstance1: TUniqueInstance;
     XMLPropStorage1: TXMLPropStorage;
@@ -47,6 +49,7 @@ type
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormWindowStateChange(Sender: TObject);
     procedure LV_RVDListDblClick(Sender: TObject);
@@ -312,7 +315,13 @@ end;
 
 procedure TFm_WinMount.FormCreate(Sender: TObject);
 var i :Integer;
+    s :String;
 begin
+  //AppendPathDelim(GetUserDir + 'Documents');
+  s:=GetAppConfigDir(False);
+  ForceDirectories(s);
+  XMLPropStorage1.FileName:=s+ChangeFileExt(ExtractFileName(Application.ExeName),'.xml');
+  XMLPropStorage1.Active:=True;
   XMLPropStorage1.Restore;
   Application.ProcessMessages;
   TrayIcon1.Show;
@@ -326,6 +335,15 @@ begin
   for i := 0 to LV_RVDList.Items.Count-1 do
     unMountRC(LV_RVDList.Items[i]);
   XMLPropStorage1.Save;
+end;
+
+procedure TFm_WinMount.FormResize(Sender: TObject);
+begin
+  //if Fm_WinMount.Height>454;
+  if Panel_m.Height<=310 then begin
+    sb_rcMount.Height:=Fm_WinMount.Height-48-310-6-12;
+    Panel_m.Height:=310;
+  end;
 end;
 
 procedure TFm_WinMount.FormShow(Sender: TObject);

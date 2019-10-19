@@ -6,13 +6,14 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, StdCtrls, EditBtn,FileUtil,
-  Buttons, process, UTF8Process, ECEditBtns,strutils;
+  Buttons, ExtCtrls, process, UTF8Process, vte_json, ECEditBtns,strutils;
 
 type
 
   { TFm_AddRVD }
 
   TFm_AddRVD = class(TForm)
+    SpeedButton1: TSpeedButton;
     btn_OK: TBitBtn;
     btn_Cancel: TBitBtn;
     ck_AutoMount: TCheckBox;
@@ -32,12 +33,14 @@ type
     Label7: TLabel;
     Label8: TLabel;
     mo_RcloneOther: TMemo;
-    SpeedButton1: TSpeedButton;
+    btn_Config: TSpeedButton;
+    btn_wgui: TSpeedButton;
     procedure btn_OKClick(Sender: TObject);
+    procedure btn_wguiClick(Sender: TObject);
     procedure ECCSpeedBtnClick(Sender: TObject);
     procedure ed_MountNameEnter(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btn_ConfigClick(Sender: TObject);
   private
 
   public
@@ -77,6 +80,24 @@ begin
   ModalResult:=mrOK;
 end;
 
+procedure TFm_AddRVD.btn_wguiClick(Sender: TObject);
+var t:TProcessUTF8;
+begin
+  t:= TProcessUTF8.Create(NIL);
+  try
+    t.Executable := rcloneFile;
+    t.Parameters.Add('rcd');
+    t.Parameters.Add('--rc-web-gui');
+    t.Parameters.Add('--rc-user=admin');
+    t.Parameters.Add('--rc-pass=admin');
+    t.Options := t.Options + [poWaitOnExit];
+    t.Execute;
+    //GetRemotes;
+  finally
+    t.Free;
+  end;
+end;
+
 procedure TFm_AddRVD.ECCSpeedBtnClick(Sender: TObject);
 begin
   GetRemotes;
@@ -95,7 +116,7 @@ begin
     //GetRemotes;
 end;
 
-procedure TFm_AddRVD.SpeedButton1Click(Sender: TObject);
+procedure TFm_AddRVD.btn_ConfigClick(Sender: TObject);
 var t:TProcessUTF8;
 begin
   //ShellExecute(0,nil, PChar('cmd'),PChar('/k '+rcloneFile+' config'),nil,1);

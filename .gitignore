@@ -2,4 +2,4 @@
 *.exe
 *.*~
 rcmount.xml
-rcmount.xml
+lib\x86_64-win64\*

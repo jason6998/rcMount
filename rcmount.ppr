@@ -4,11 +4,8 @@ program rcmount;
 
 uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
-  cthreads,
   {$ENDIF}{$ENDIF}
-  Interfaces, // this includes the adLCL widgetset
-  Forms, uFm_WinMount, uFm_Setup, uFm_AddRVD, uFm_DirTree
-  { you can add units after this };
+  Forms, Interfaces, uFm_WinMount;
 
 {$R *.res}
 

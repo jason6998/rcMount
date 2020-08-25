@@ -5,8 +5,8 @@ unit uFm_DirTree;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, vte_json,
-  fpjson, jsonparser, jsonscanner, process, UTF8Process;
+  Classes, SysUtils, Forms, Controls, Graphics, StdCtrls, vte_json,
+  fpjson, jsonparser, process;
 
 type
 

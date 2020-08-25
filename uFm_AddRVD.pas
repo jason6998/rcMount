@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, StdCtrls, EditBtn,FileUtil,
-  Buttons, ExtCtrls, process, UTF8Process, vte_json, ECEditBtns,strutils;
+  Buttons, process, UTF8Process, ECEditBtns,strutils;
 
 type
 

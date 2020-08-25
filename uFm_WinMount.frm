@@ -1,7 +1,7 @@
 object Fm_WinMount: TFm_WinMount
-  Left = 461
+  Left = 460
   Height = 454
-  Top = 267
+  Top = 266
   Width = 926
   Caption = 'Mount the remote storage as a local drive using rclone'
   ClientHeight = 454
@@ -979,7 +979,7 @@ object Fm_WinMount: TFm_WinMount
     }
     OnClick = TrayIcon1Click
     Left = 352
-    Top = 210
+    Top = 208
   end
   object PopupMenu1: TPopupMenu
     Left = 480

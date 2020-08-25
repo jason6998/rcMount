@@ -1,7 +1,7 @@
 object Fm_AddRVD: TFm_AddRVD
-  Left = 86
+  Left = 460
   Height = 727
-  Top = 85
+  Top = 266
   Width = 685
   BorderStyle = bsDialog
   Caption = '新建虛擬磁碟'

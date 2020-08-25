@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, ComCtrls,
-  Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess, PairSplitter,
-  registry, process,LazFileUtils, ksplitter, cySplitter,
+  Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
+  registry, process,LazFileUtils,
   UniqueInstance, strutils;
 
 type
@@ -246,7 +246,6 @@ begin
 end;
 
 procedure TFm_WinMount.btn_MountClick(Sender: TObject);
-var vt:TAsyncProcess;
 begin
   //掛載
   if not RcloneFileExists then abort;
@@ -314,15 +313,14 @@ begin
 end;
 
 procedure TFm_WinMount.FormCreate(Sender: TObject);
-var i :Integer;
-    s :String;
+var s :String;
 begin
   //AppendPathDelim(GetUserDir + 'Documents');
   s:=GetAppConfigDir(False);
   ForceDirectories(s);
   XMLPropStorage1.FileName:=s+ChangeFileExt(ExtractFileName(Application.ExeName),'.xml');
   XMLPropStorage1.Active:=True;
-  XMLPropStorage1.Restore;
+//  XMLPropStorage1.Restore;
   Application.ProcessMessages;
   TrayIcon1.Show;
   CloseNeeded := False;
@@ -334,7 +332,7 @@ var i:Integer;
 begin
   for i := 0 to LV_RVDList.Items.Count-1 do
     unMountRC(LV_RVDList.Items[i]);
-  XMLPropStorage1.Save;
+  //XMLPropStorage1.Save;
 end;
 
 procedure TFm_WinMount.FormResize(Sender: TObject);

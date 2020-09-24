@@ -4,12 +4,11 @@
     <PathDelim Value="\"/>
     <Version Value="12"/>
     <BuildModes Active="Release"/>
-    <Units Count="17">
+    <Units Count="18">
       <Unit0>
         <Filename Value="rcmount.ppr"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <CursorPos Y="19"/>
+        <CursorPos X="70" Y="14"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -21,11 +20,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
+        <TopLine Value="304"/>
+        <CursorPos Y="328"/>
         <UsageCount Value="200"/>
-        <Bookmarks Count="3">
-          <Item0 Y="212"/>
-          <Item1 Y="384" ID="1"/>
-          <Item2 X="2" Y="100" ID="2"/>
+        <Bookmarks Count="2">
+          <Item0 Y="384" ID="1"/>
+          <Item1 X="2" Y="100" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -37,10 +37,11 @@
         <ComponentName Value="Fm_Setup"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="7"/>
+        <EditorIndex Value="4"/>
         <CursorPos X="3" Y="37"/>
         <UsageCount Value="200"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="uFm_AddRVD.pas"/>
@@ -49,8 +50,9 @@
         <ComponentName Value="Fm_AddRVD"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="32" Y="9"/>
+        <CursorPos X="104" Y="13"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -63,8 +65,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="3"/>
-        <CursorPos X="43" Y="35"/>
-        <UsageCount Value="64"/>
+        <TopLine Value="7"/>
+        <CursorPos X="13" Y="26"/>
+        <UsageCount Value="87"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
@@ -75,7 +78,7 @@
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="5"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="14"/>
       </Unit5>
       <Unit6>
         <Filename Value="..\..\Bitbucket\EZWinPos\EzWinPos_Lazarus\uFmMain.pas"/>
@@ -85,212 +88,215 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="980"/>
         <CursorPos X="15" Y="1000"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="4"/>
       </Unit6>
       <Unit7>
-        <Filename Value="unit1.pas"/>
-        <UnitName Value="Unit1"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="23" Y="33"/>
-        <UsageCount Value="1"/>
-      </Unit7>
-      <Unit8>
         <Filename Value="C:\codetyphon\fpcsrc\packages\fcl-process\src\process.pp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="12"/>
         <CursorPos X="35" Y="29"/>
-        <UsageCount Value="83"/>
-      </Unit8>
-      <Unit9>
+        <UsageCount Value="81"/>
+      </Unit7>
+      <Unit8>
         <Filename Value="..\..\Bitbucket\myclip\uFmMyClip.pas"/>
         <ComponentName Value="FmMyClip"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="28"/>
-      </Unit9>
-      <Unit10>
+        <UsageCount Value="26"/>
+      </Unit8>
+      <Unit9>
         <Filename Value="C:\codetyphon\typhon\components\BaseUtils\lazfileutils.pas"/>
         <FRMtype Value="0"/>
         <UnitName Value="LazFileUtils"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="77"/>
         <CursorPos X="10" Y="90"/>
-        <UsageCount Value="43"/>
-      </Unit10>
-      <Unit11>
+        <UsageCount Value="41"/>
+      </Unit9>
+      <Unit10>
         <Filename Value="C:\codetyphon\fpcsrc\rtl\objpas\sysutils\osutilsh.inc"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos X="10" Y="47"/>
-        <UsageCount Value="43"/>
-      </Unit11>
-      <Unit12>
+        <UsageCount Value="41"/>
+      </Unit10>
+      <Unit11>
         <Filename Value="C:\codetyphon\fpcsrc\rtl\win\sysutils.pp"/>
         <FRMtype Value="0"/>
         <UnitName Value="SysUtils"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1420"/>
         <CursorPos X="19" Y="1426"/>
-        <UsageCount Value="43"/>
-      </Unit12>
-      <Unit13>
+        <UsageCount Value="41"/>
+      </Unit11>
+      <Unit12>
         <Filename Value="C:\codetyphon\fpcsrc\rtl\objpas\sysutils\osutil.inc"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="113"/>
         <CursorPos X="10" Y="126"/>
-        <UsageCount Value="43"/>
-      </Unit13>
-      <Unit14>
+        <UsageCount Value="41"/>
+      </Unit12>
+      <Unit13>
         <Filename Value="C:\codetyphon\fpcsrc\packages\fcl-process\src\processbody.inc"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="142"/>
         <CursorPos X="28" Y="154"/>
-        <UsageCount Value="83"/>
-      </Unit14>
-      <Unit15>
+        <UsageCount Value="81"/>
+      </Unit13>
+      <Unit14>
         <Filename Value="C:\codetyphon\fpcsrc\rtl\objpas\classes\classesh.inc"/>
         <FRMtype Value="0"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="607"/>
         <CursorPos X="14" Y="745"/>
-        <UsageCount Value="82"/>
-      </Unit15>
-      <Unit16>
+        <UsageCount Value="80"/>
+      </Unit14>
+      <Unit15>
         <Filename Value="C:\codetyphon\typhon\lcl\propertystorage.pas"/>
         <FRMtype Value="0"/>
         <UnitName Value="PropertyStorage"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="528"/>
         <CursorPos Y="541"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="8"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="C:\codetyphon\typhon\lcl\lclclasses.pp"/>
+        <FRMtype Value="0"/>
+        <UnitName Value="LCLClasses"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="10"/>
+        <CursorPos X="10" Y="26"/>
+        <UsageCount Value="21"/>
       </Unit16>
+      <Unit17>
+        <Filename Value="C:\codetyphon\typhon\lcl\include\customform.inc"/>
+        <FRMtype Value="0"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="902"/>
+        <CursorPos Y="916"/>
+        <UsageCount Value="10"/>
+      </Unit17>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="474" TopLine="468"/>
+        <Caret Line="448" Column="20" TopLine="425"/>
       </Position1>
       <Position2>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="475" TopLine="468"/>
+        <Caret Line="455" Column="39" TopLine="431"/>
       </Position2>
       <Position3>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="476" TopLine="468"/>
+        <Caret Line="472" Column="18" TopLine="448"/>
       </Position3>
       <Position4>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="477" TopLine="468"/>
+        <Caret Line="473" Column="18" TopLine="449"/>
       </Position4>
       <Position5>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="478" TopLine="468"/>
+        <Caret Line="474" Column="18" TopLine="450"/>
       </Position5>
       <Position6>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="479" TopLine="468"/>
+        <Caret Line="475" Column="18" TopLine="451"/>
       </Position6>
       <Position7>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="480" TopLine="468"/>
+        <Caret Line="476" Column="18" TopLine="452"/>
       </Position7>
       <Position8>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="481" TopLine="468"/>
+        <Caret Line="480" Column="20" TopLine="457"/>
       </Position8>
       <Position9>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="482" TopLine="468"/>
+        <Caret Line="41" Column="20" TopLine="28"/>
       </Position9>
       <Position10>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="480" TopLine="468"/>
+        <Caret Line="61" Column="30" TopLine="38"/>
       </Position10>
       <Position11>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="443" TopLine="430"/>
+        <Caret Line="62" Column="30" TopLine="39"/>
       </Position11>
       <Position12>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="444" TopLine="430"/>
+        <Caret Line="215" Column="42" TopLine="191"/>
       </Position12>
       <Position13>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="445" TopLine="430"/>
       </Position13>
       <Position14>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="446" TopLine="430"/>
+        <Caret Line="41" Column="20" TopLine="17"/>
       </Position14>
       <Position15>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="447" TopLine="430"/>
       </Position15>
       <Position16>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="448" TopLine="430"/>
+        <Caret Line="214" Column="27" TopLine="191"/>
       </Position16>
       <Position17>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="449" TopLine="430"/>
+        <Caret Line="266" Column="23" TopLine="242"/>
       </Position17>
       <Position18>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="474" TopLine="461"/>
+        <Caret Line="335" Column="25" TopLine="311"/>
       </Position18>
       <Position19>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="337" Column="5" TopLine="331"/>
+        <Caret Line="319" TopLine="302"/>
       </Position19>
       <Position20>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="443" TopLine="431"/>
+        <Caret Line="320" TopLine="302"/>
       </Position20>
       <Position21>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="444" TopLine="431"/>
+        <Caret Line="322" TopLine="302"/>
       </Position21>
       <Position22>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="445" TopLine="431"/>
+        <Caret Line="324" TopLine="302"/>
       </Position22>
       <Position23>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="446" TopLine="431"/>
+        <Caret Line="325" TopLine="302"/>
       </Position23>
       <Position24>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="447" TopLine="431"/>
+        <Caret Line="326" TopLine="302"/>
       </Position24>
       <Position25>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="448" TopLine="431"/>
+        <Caret Line="327" TopLine="303"/>
       </Position25>
       <Position26>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="474" TopLine="461"/>
+        <Caret Line="317" TopLine="303"/>
       </Position26>
       <Position27>
-        <Filename Value="uFm_DirTree.pas"/>
-        <Caret Line="40" TopLine="27"/>
+        <Filename Value="uFm_WinMount.pas"/>
+        <Caret Line="328" TopLine="304"/>
       </Position27>
       <Position28>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="249" TopLine="236"/>
+        <Caret Line="317" TopLine="304"/>
       </Position28>
       <Position29>
         <Filename Value="uFm_WinMount.pas"/>
-        <Caret Line="316" Column="6" TopLine="288"/>
+        <Caret Line="328" TopLine="304"/>
       </Position29>
-      <Position30>
-        <Filename Value="rcmount.ppr"/>
-        <Caret Line="12" Column="49"/>
-      </Position30>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -304,14 +310,28 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="uFm_WinMount.pas"/>
-        <Line Value="441"/>
+        <Line Value="319"/>
       </Item>
       <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="uFm_WinMount.pas"/>
-        <Line Value="472"/>
+        <Line Value="214"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="uFm_WinMount.pas"/>
+        <Line Value="266"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="uFm_WinMount.pas"/>
+        <Line Value="322"/>
       </Item>
     </BreakPoints>
   </Debugging>

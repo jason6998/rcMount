@@ -1,16 +1,15 @@
 object Fm_WinMount: TFm_WinMount
-  Left = 460
-  Height = 454
-  Top = 266
-  Width = 926
+  Left = 417
+  Height = 363
+  Top = 225
+  Width = 741
   Caption = 'Mount the remote storage as a local drive using rclone'
-  ClientHeight = 454
-  ClientWidth = 926
-  Constraints.MinHeight = 454
-  DesignTimePPI = 120
+  ClientHeight = 363
+  ClientWidth = 741
+  Constraints.MinHeight = 363
   Font.CharSet = CHINESEBIG5_CHARSET
   Font.Color = clBlack
-  Font.Height = -20
+  Font.Height = -16
   Font.Name = 'Microsoft JhengHei UI'
   Font.Pitch = fpVariable
   Font.Quality = fqDraft
@@ -23,52 +22,52 @@ object Fm_WinMount: TFm_WinMount
   Position = poScreenCenter
   SessionProperties = 'Width;Height;Left;Top'
   ShowHint = True
-  LCLVersion = '6.9'
+  LCLVersion = '7.1'
   object Panel_top: TPanel
     Left = 0
-    Height = 48
+    Height = 38
     Top = 0
-    Width = 926
+    Width = 741
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 48
-    ClientWidth = 926
-    Constraints.MinHeight = 48
+    ClientHeight = 38
+    ClientWidth = 741
+    Constraints.MinHeight = 38
     Font.CharSet = CHINESEBIG5_CHARSET
     Font.Color = clBlack
-    Font.Height = -20
+    Font.Height = -16
     Font.Name = 'Microsoft JhengHei UI'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
     ParentFont = False
     TabOrder = 0
     object Panel_topR: TPanel
-      Left = 806
-      Height = 48
+      Left = 645
+      Height = 38
       Top = 0
-      Width = 120
+      Width = 96
       Align = alRight
       BevelOuter = bvNone
-      ClientHeight = 48
-      ClientWidth = 120
+      ClientHeight = 38
+      ClientWidth = 96
       Font.CharSet = CHINESEBIG5_CHARSET
       Font.Color = clBlack
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Microsoft JhengHei UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
       ParentFont = False
       TabOrder = 0
       object btn_SetUp: TSpeedButton
-        Left = 11
-        Height = 41
-        Top = 8
-        Width = 94
+        Left = 9
+        Height = 33
+        Top = 6
+        Width = 75
         Caption = '設定'
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -153,14 +152,14 @@ object Fm_WinMount: TFm_WinMount
       end
     end
     object Label1: TLabel
-      Left = 10
-      Height = 25
-      Top = 16
-      Width = 89
+      Left = 8
+      Height = 20
+      Top = 13
+      Width = 72
       Caption = 'RCMount'
       Font.CharSet = CHINESEBIG5_CHARSET
       Font.Color = clBlack
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Microsoft JhengHei UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
@@ -170,44 +169,51 @@ object Fm_WinMount: TFm_WinMount
   end
   object Panel_m: TPanel
     Left = 0
-    Height = 310
-    Top = 48
-    Width = 926
+    Height = 248
+    Top = 38
+    Width = 741
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
     Caption = 'Panel_m'
-    ClientHeight = 310
-    ClientWidth = 926
-    Constraints.MinHeight = 310
+    ClientHeight = 248
+    ClientWidth = 741
+    Constraints.MinHeight = 248
+    Font.CharSet = CHINESEBIG5_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Microsoft JhengHei UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
     TabOrder = 1
     object Panel_mr: TPanel
-      Left = 806
-      Height = 310
+      Left = 645
+      Height = 248
       Top = 0
-      Width = 120
+      Width = 96
       Align = alRight
       BevelOuter = bvNone
-      ClientHeight = 310
-      ClientWidth = 120
+      ClientHeight = 248
+      ClientWidth = 96
       Font.CharSet = CHINESEBIG5_CHARSET
       Font.Color = clBlack
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Microsoft JhengHei UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
       ParentFont = False
       TabOrder = 0
       object btn_Add: TSpeedButton
-        Left = 11
-        Height = 38
-        Top = 14
-        Width = 94
+        Left = 9
+        Height = 30
+        Top = 11
+        Width = 75
         Caption = '加入'
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -291,16 +297,16 @@ object Fm_WinMount: TFm_WinMount
         ParentFont = False
       end
       object btn_Remove: TSpeedButton
-        Left = 11
-        Height = 38
-        Top = 98
-        Width = 94
+        Left = 9
+        Height = 30
+        Top = 78
+        Width = 75
         Caption = '移除'
         Enabled = False
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -384,16 +390,16 @@ object Fm_WinMount: TFm_WinMount
         ParentFont = False
       end
       object btn_Mount: TSpeedButton
-        Left = 11
-        Height = 38
-        Top = 156
-        Width = 94
+        Left = 9
+        Height = 30
+        Top = 125
+        Width = 75
         Caption = '掛載'
         Enabled = False
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -477,16 +483,16 @@ object Fm_WinMount: TFm_WinMount
         ParentFont = False
       end
       object btn_unMount: TSpeedButton
-        Left = 11
-        Height = 41
-        Top = 198
-        Width = 94
+        Left = 9
+        Height = 33
+        Top = 158
+        Width = 75
         Caption = '卸載'
         Enabled = False
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -570,16 +576,16 @@ object Fm_WinMount: TFm_WinMount
         ParentFont = False
       end
       object btn_Modify: TSpeedButton
-        Left = 11
-        Height = 38
-        Top = 56
-        Width = 94
+        Left = 9
+        Height = 30
+        Top = 45
+        Width = 75
         Caption = '修改'
         Enabled = False
         Flat = True
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
@@ -664,31 +670,31 @@ object Fm_WinMount: TFm_WinMount
       end
       object Panel4: TPanel
         Left = 0
-        Height = 66
-        Top = 244
-        Width = 120
+        Height = 53
+        Top = 195
+        Width = 96
         Align = alBottom
         BevelOuter = bvNone
-        ClientHeight = 66
-        ClientWidth = 120
+        ClientHeight = 53
+        ClientWidth = 96
         Font.CharSet = CHINESEBIG5_CHARSET
         Font.Color = clBlack
-        Font.Height = -20
+        Font.Height = -16
         Font.Name = 'Microsoft JhengHei UI'
         Font.Pitch = fpVariable
         Font.Quality = fqDraft
         ParentFont = False
         TabOrder = 0
         object btn_Exit: TSpeedButton
-          Left = 11
-          Height = 41
-          Top = 10
-          Width = 94
+          Left = 9
+          Height = 33
+          Top = 8
+          Width = 75
           Caption = '隱藏'
           Flat = True
           Font.CharSet = CHINESEBIG5_CHARSET
           Font.Color = clBlack
-          Font.Height = -20
+          Font.Height = -16
           Font.Name = 'Microsoft JhengHei UI'
           Font.Pitch = fpVariable
           Font.Quality = fqDraft
@@ -774,33 +780,33 @@ object Fm_WinMount: TFm_WinMount
       end
     end
     object LV_RVDList: TListView
-      Left = 6
-      Height = 298
-      Top = 6
-      Width = 794
+      Left = 5
+      Height = 238
+      Top = 5
+      Width = 635
       Align = alClient
       AutoSort = False
       AutoWidthLastColumn = True
-      BorderSpacing.Around = 6
+      BorderSpacing.Around = 5
       BorderWidth = 2
       Columns = <      
         item
           AutoSize = True
           Caption = 'S'
-          Width = 28
+          Width = 24
         end      
         item
           Caption = 'Remote'
-          Width = 250
+          Width = 200
         end      
         item
           Caption = 'Mountpoint'
-          Width = 508
+          Width = 403
         end>
       ColumnClick = False
       Font.CharSet = CHINESEBIG5_CHARSET
       Font.Color = clBlack
-      Font.Height = -20
+      Font.Height = -16
       Font.Name = 'Microsoft JhengHei UI'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
@@ -820,25 +826,25 @@ object Fm_WinMount: TFm_WinMount
   object Splitter1: TSplitter
     Cursor = crVSplit
     Left = 0
-    Height = 6
-    Top = 358
-    Width = 926
+    Height = 5
+    Top = 286
+    Width = 741
     Align = alBottom
     ResizeAnchor = akBottom
     ResizeStyle = rsPattern
   end
   object sb_rcMount: TMemo
-    Left = 6
-    Height = 78
-    Top = 370
-    Width = 914
+    Left = 5
+    Height = 62
+    Top = 296
+    Width = 731
     Align = alBottom
-    BorderSpacing.Around = 6
+    BorderSpacing.Around = 5
     Color = clMenuBar
-    Constraints.MinHeight = 65
+    Constraints.MinHeight = 52
     Font.CharSet = CHINESEBIG5_CHARSET
     Font.Color = clBlack
-    Font.Height = -20
+    Font.Height = -16
     Font.Name = 'Microsoft JhengHei UI'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
@@ -867,8 +873,8 @@ object Fm_WinMount: TFm_WinMount
     Active = False
     OnSaveProperties = XMLPropStorage1SaveProperties
     OnRestoreProperties = XMLPropStorage1RestoreProperties
-    Left = 480
-    Top = 210
+    Left = 384
+    Top = 168
   end
   object TrayIcon1: TTrayIcon
     PopUpMenu = PopupMenu1
@@ -978,12 +984,12 @@ object Fm_WinMount: TFm_WinMount
       0000
     }
     OnClick = TrayIcon1Click
-    Left = 352
-    Top = 208
+    Left = 282
+    Top = 166
   end
   object PopupMenu1: TPopupMenu
-    Left = 480
-    Top = 130
+    Left = 384
+    Top = 104
     object N_WinShow: TMenuItem
       Caption = '顯示主視窗'
       OnClick = N_WinShowClick
@@ -994,74 +1000,56 @@ object Fm_WinMount: TFm_WinMount
     end
   end
   object ImageList1: TImageList
-    Left = 300
-    Top = 130
+    Left = 240
+    Top = 104
     Bitmap = {
-      4C69020000001000000010000000F4F4F400E8E8E800E8E8E800E9E9E900E9E9
-      E900E8E8E803E7E7E718E6E6E621E7E7E71DE7E7E70CE8E8E802E9E9E900E8E8
-      E800E9E9E900EBEBEB00FCFCFC00BFBFBF008181810083838301838383018181
-      812B88888880A2A2A2BDA9A9A9CBA5A5A5C6969696A6828282568282820B8383
-      83018484840090909000EBEBEB00B8B8B80075757500767676118080807EADAD
-      ADFEC4C4C4FFC0C0C0FFBCBCBCFEBBBBBBFFBEBEBEFFB4B4B4FE929292D77777
-      77327878780384848400E9E9E900B7B7B7007373730080808087B1B1B1F1B3B3
-      B3FFA6A6A6FF9E9E9EFF9B9B9BFF989898FF989898FF9E9E9EFFACACACFD9191
-      91C77777773283838300E8E8E800B7B7B70275757563ACACACFFA4A4A4FE9898
-      98FF969696FF939393FF909090FF8E8E8EFF8B8B8BFF888888FF858585FF9C9C
-      9CFD8B8B8BD68282820BE9E9E900B7B7B71B8B8B8BBDA2A2A2FD949494FF9191
-      91FF8E8E8EFF8B8B8BFF898989FF868686FF838383FF808080FF7F7F7FFF7F7F
-      7FFF959595FE8383835DE8E8E802BBBBBB48959595EA8D8D8DFD8B8B8BFF8888
-      88FF868686FF838383FF818181FF7E7E7EFF7C7C7CFF797979FF787878FF7575
-      75FF7F7F7FFF8F8F8FAAE8E8E80FBCBCBC6D8E8E8EFA838383FF808080FF7C7C
-      7CFF797979FF777777FF757575FF737373FF737373FF717171FF717171FF7070
-      70FF747474FE8F8F8FC9E8E8E81FB9B9B9757E7E7EFE757575FF757575FF7575
-      75FF757575FF757575FF757575FF757575FF757575FF757575FF757575FF7575
-      75FF7C7C7CFE8C8C8CCEE8E8E823B9B9B961838383F57D7D7DFE7A7A7AFF7A7A
-      7AFF7A7A7AFF7A7A7AFF7A7A7AFF7A7A7AFF7A7A7AFF7A7A7AFF7A7A7AFF7B7B
-      7BFF848484FF8C8C8CC0E8E8E81AB8B8B82E848484D88B8B8BFD818181FF8080
-      80FF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF808080FF808080FF8585
-      85FF929292FF86868686E8E8E804B7B7B70B7878789E989898FE8C8C8CFE8484
-      84FF848484FF848484FF848484FF848484FF848484FF848484FF868686FF9494
-      94FF8F8F8FFD8282822EE9E9E901B7B7B701727272218A8A8AD6A0A0A0FE9292
-      92FF8B8B8BFF898989FF898989FF898989FF8A8A8AFF8E8E8EFF9A9A9AFF9999
-      99F17C7C7C7F83838300E8E8E800B7B7B700757575015E5E5E45848484D8A8A8
-      A8FEA0A0A0FD979797FF949494FF959595FF9A9A9AFEA5A5A5FEA5A5A5FF6262
-      62886F6F6F1182828200E8E8E800B6B6B600757575003A3A3A021A1A1A385757
-      57BF848484E89E9E9EFBA3A3A3FFA1A1A1FE959595F56E6E6ED73D3D3D881212
-      120A686868007F7F7F00E8E8E800DADADA00B8B8B8009C9C9C028181810C8282
-      822C9191914BB1B1B16FB8B8B879B5B5B575A5A5A560848484398383831C8888
-      8804B2B2B200BEBEBE00F4F4F400FFFFFF00FFFFFF00FFFFFF00FFFFFF00FCFD
-      FD00E9F2ED03D4E4DB18D5E5DB21D5E4DB1DD7E6DD0CFCFDFD02FEFEFE00FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FEFFFE01FAFCFA0186B3
-      992B68A17F8066A47FBD76AF8DCB6FAB87C6569871A683B19656BDD5C70BFEFF
-      FE01FEFFFE00FFFFFF00FFFFFF00FFFFFF00FEFFFF00E2EDE7116DA5847E75B2
-      8DFEACDABEFFB0DFC2FFACDEBFFEAADDBEFFACDDBFFF8AC4A1FE4C956AD7B3D0
-      BF32F8FBF903FEFFFF00FFFFFF00FFFFFF00FCFDFC0071A887878CC3A2F19DD8
-      B4FF8BD0A6FF81CB9EFF7DC99BFF7AC898FF79C898FF82CC9FFF93D1ABFD63A5
-      7EC7B5D1C132FEFFFE00FFFFFF00EDF4F002609C796384C29DFF88D0A5FE76C7
-      98FF75C796FF70C693FF6CC590FF69C38EFF66C18BFF61BF88FF5CBD84FF7BC8
-      9BFD419062D6BDD6C70BFEFEFE00AECCBB1B4F976CBD85D0A5FD6EC593FF6AC4
-      91FF67C38EFF62C18BFF5FC189FF5CBE86FF59BD83FF55BC80FF52BB7FFF54BC
-      81FF63B786FE5996735DEBF3EE0289B69B485CAF80EA61C48DFD5EC28AFF5AC1
-      88FF57BF86FF54BE83FF50BC81FF4DBB7EFF49BA7CFF46B879FF43B778FF40B6
-      75FF50BD81FF449164AAD6E5DC0F8FBBA26D57B683FA4FBD82FF4BBC80FF46BA
-      7CFF42B979FF3FB877FF3CB675FF3AB673FF38B573FF37B571FF36B571FF35B4
-      70FF3CB976FE4D9F71C9D7E5DD1F8BBA9F7537AF74FE35B775FF35B775FF35B7
-      75FF35B775FF35B775FF35B775FF35B775FF35B775FF35B775FF35B775FF35B7
-      75FF3CBE7EFE439F6FCED7E5DD238AB99F6135AC73F539BC7DFE38BB7AFF38BB
-      7AFF38BB7AFF38BB7AFF38BB7AFF38BB7AFF38BB7AFF38BB7AFF38BB7AFF39BB
-      7BFF40C386FF409A6BC0D8E6DE1A91BAA12E2E9B68D841C78DFD3BBF81FF3ABE
-      80FF3ABE7FFF3ABE7FFF3ABE7FFF3ABE7FFF3ABE7FFF3ABE80FF3ABE80FF3DC2
-      86FF43C48FFF3C895E86DDE9E204CEE0D50B3085569E47C998FE40C58CFE3DC1
-      84FF3CC284FF3CC284FF3CC284FF3CC284FF3CC284FF3CC184FF3DC286FF44C9
-      95FF2AA16DFD79AA8D2EF8FBF901FEFFFE01BED4C721299062D64ACC9CFE44C8
-      93FF40C58BFF3FC489FF3FC489FF3FC489FF3FC48AFF42C68EFF48CD9BFF3DB5
-      86F15496737FFAFCFB00FFFFFF00FFFFFF00F9F9F9010E311E452C9165D84FD2
-      A5FE4DD2A2FD46CC98FF44CA94FF45CB95FF49CE9CFE4FD4A6FE45C294FF1759
-      3788818A8511FEFFFE00FEFFFE00FFFFFF00F9FAFA000708070205170C381958
-      37BF32956CE842B98FFB47C298FF45BF95FE3BAD83F5267750D70D3920880405
-      040A82838300FEFEFE00FEFEFE00FFFFFF00FDFDFD00838383028081810C8082
-      802C818F864B88B09B6F8AB79F7989B59E7584A4926080837F398082811C8181
-      8104C0C0C000FFFFFF00FFFFFF00
+      4C7A020000001000000010000000AC0500000000000078DA8D556B4C5367183E
+      2D982DC266F08F0E758E982CD9346423715C84880A5EE60C6671301765029B63
+      4E6E9602E5D62BA52D947BA15004414A1061CAA55C2C6D010BC860048D5C82C3
+      2D46B9485CC606C9B89CEFDD7B4E2CC1CD457F3CE9F9BEF33EEFF5794F171616
+      A899991916B3B3B32CF0D96E7A7A7AEBD4D4940BFEEE4038E21DF7F93BD6666E
+      6E8E5A5D5DA52C160B25168B29A954CA6180CFBB150A85A8B2B2D274EDDAB501
+      BD5EDF5B5858582D914802110E8C8D4C26A3727272581F6D6D6D149FCFA7E2E2
+      E29C4422516A7D7D3DB15AADD0D9D9091D1D1DC4683482D96C86E6E666929797
+      37161F1FEF96909060C7F860F2686D6DA5783C1E85DCF4868686F9A6A626A8AE
+      AE86B2B232D0E974A0D56A5930E7BABA3A3A3737B78FF18179B0B5209F8BF1C3
+      F01D54555511C616F385FCFC7CC01C212B2B0B323232006B82B4B434282D2DA5
+      F13CCAD4F23CFE363C9BB05EBAA0A000D0FF1A47A954825C2E078C05981F0885
+      42161A8D86E0DD59A6A758DF513C3F55ABD5B42D8E8D83BD84D4D454484E4E06
+      814000583760AEAC8FECECEC5AE46FC21E4560BC655B0C9B2DD6C8DA626F58C4
+      C4C4B0888E8E86D8D85882FC7EE4EF6C6F6FE7630CC2D8BE2E3006C9CCCC1C42
+      FE2EE48760ECC594941492989808AF42525212E0EC00F99DC877C6F9BBE2791C
+      6BA7997AD7F7693D987B06CC0C50074C8FE4C8B7C7FE3B605FCA706E4C4E84F1
+      FD7F60FACACC086BA7717EAE383F0EF239972E5D7251A954A357AE5C6134B636
+      3B1BF01D3BD3929212282E2E9EC7FA85EBF4C3E897131C1CECCFD451535343D0
+      0F5D5454C4C6C2D9323C827BC000424343155151514E189FE5B7B4B4B0FAF7F2
+      F2E23A3B3B7B04050559D0CF0CEA75E5EAD5AB50515141D0C7626464E4988F8F
+      8F62F3E6CD1BC3C3C329EC09CB9F989860770875C9C5FE39A2DF3DA8C1E3B80B
+      51782F30180C7C8C7B0E7D7A62CEDB515FF68D8D8D14EE14B580BB0F002F6095
+      A6A9D93F9FD9DD7FFC60EBC893072E238F1FEC189B9A74C47B2E21E43FF63610
+      209CE5D5658EBCA9787778855074BE4A688ABBA11E88BA9EDE1BA88DA9963614
+      069A46FA1C183BC4BFB8403D7A36ED14A197A5F21BD5A46EC20C377FED86BA87
+      16523B6986BA490BA8AC15E433CD85B1A6618BDBDF2B4B76E4859C57A9989AF4
+      F4CCDB95F397C79B2163B81AC4036590D2AF83C43B5A10202483E5907FF73A1D
+      A64FED33DCED72B3E5F06CE10FEEB9524198ACFB322886F524AE4F0BFCBE4288
+      EECD878B3D39F0FDED2C38DF95012116059C31C920E98E8E3E90133A6A1AC55A
+      B01F3F0E1AB705145D34A50DEBE9C89E7CB860CD85EF90138A9CAFBB9470C62C
+      87D326297CD12182CF8D4238D52186B05639395DC83B3BF7D7EF5C658BEEE899
+      1BA2A72156351DDCAD82AFBA14106491C329B3144EA2ED09632A1CBB950C87DB
+      0470A835017C5BF870D22406BFDC6F6A479FFCB229DB581911D4225D0E3049E0
+      38C6388CB607DB05B0BF2D1EBCD1D6AB85071E061EB81B62E013C4DEE668F06E
+      8F2327CA63FAC79E4CEECCB855CE77BF114BF6B6F2E175E16D4E2587CAA38690
+      BF4BD55E1EB2B78EB7E8D991423C8C89F02A781A93C0F7B61C7C4B7EE81C9F7A
+      E89C7BABC2D555173E7EA04F4DEFB388C1CB2C42085F02110B9F6E391CB26683
+      B732583E39FBC87EE8B711878FD202CB8EF46B896F4F26F1E9928177F74B80F7
+      0CD7AF5F031F5644D0825AB52BEA88D122C77CBFCFE5039CE9A783A5C4EF4E3E
+      F8F664C07EAB721D5470B0370B8EFEAC031F837CFE54214FB8BCBAB2A6BFA5A5
+      25CEDB1FBFEBBF27F7DBF1807B7A72E25E257D78500B7E3F1580FF80068E0D95
+      9280FBD5C4BFBB00B69C76578855694E8CFE6C1A5C5A5EA6DE78F30DEE862D8E
+      1EEF7CE96E71D35C9C39D89EBD72A45B0BFE160DD9572F5D7C3FFEE4D85B9EEF
+      29EC37D86F94E0B787D19E6D1F69DC59DC6DAE08F75F2411ED1167CB8F2B6EEA
+      A254ADE502A5A18C2FABCA3B27920A3D4512F176FC46D8E37FEB5AEEFF008CE9
+      E6CC
     }
   end
   object AsyncProcess1: TAsyncProcess
@@ -1078,13 +1066,13 @@ object Fm_WinMount: TFm_WinMount
     WindowWidth = 0
     FillAttribute = 0
     OnTerminate = AsyncProcess1Terminate
-    Left = 340
-    Top = 20
+    Left = 272
+    Top = 16
   end
   object UniqueInstance1: TUniqueInstance
     Enabled = True
     Identifier = 'RCMount-At25847'
-    Left = 481
-    Top = 39
+    Left = 385
+    Top = 31
   end
 end

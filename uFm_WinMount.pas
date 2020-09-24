@@ -7,8 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Dialogs, ExtCtrls, ComCtrls,
   Buttons, StdCtrls, XMLPropStorage, Menus, AsyncProcess,
-  registry, process,LazFileUtils,
-  UniqueInstance, strutils;
+  registry, process,LazFileUtils, UniqueInstance,
+  {UniqueInstance,} strutils;
 
 type
 

@@ -24,7 +24,7 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="5"/>
+      <BuildNr Value="6"/>
       <Language Value="0404"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="Jason Wang"/>
@@ -36,7 +36,7 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="rcmount"/>
+            <Filename Value="bin\$(TargetCPU)-$(TargetOS)\rcmount"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -81,16 +81,14 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="rcmount"/>
+            <Filename Value="bin\$(TargetCPU)-$(TargetOS)\rcmount"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <Libraries Value="C:\codetyphon\binLibraries\x86_64-freebsd\;C:\codetyphon\binLibraries\x86_64-freebsd-qt4\"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
-            <TargetOS Value="darwin"/>
             <Optimizations>
               <OptimizationLevel Value="3"/>
             </Optimizations>
@@ -120,43 +118,16 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <RequiredPackages Count="12">
+    <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="pl_KControls"/>
+        <PackageName Value="pl_ECControls"/>
       </Item1>
       <Item2>
-        <PackageName Value="pl_excontrols"/>
+        <PackageName Value="pl_LuiControls"/>
       </Item2>
       <Item3>
-        <PackageName Value="pl_fzcontrols"/>
-      </Item3>
-      <Item4>
-        <PackageName Value="pl_cindy"/>
-      </Item4>
-      <Item5>
-        <PackageName Value="pl_luicontrols"/>
-      </Item5>
-      <Item6>
-        <PackageName Value="pl_eccontrols"/>
-      </Item6>
-      <Item7>
-        <PackageName Value="bs_Utils"/>
-      </Item7>
-      <Item8>
-        <PackageName Value="adFCL"/>
-      </Item8>
-      <Item9>
-        <PackageName Value="pl_virtualtreesextra"/>
-      </Item9>
-      <Item10>
-        <PackageName Value="pl_abbrevia"/>
-      </Item10>
-      <Item11>
-        <PackageName Value="bs_Controls"/>
-      </Item11>
-      <Item12>
         <PackageName Value="adLCL"/>
-      </Item12>
+      </Item3>
     </RequiredPackages>
     <Units Count="5">
       <Unit0>
@@ -201,7 +172,7 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="rcmount"/>
+      <Filename Value="bin\$(TargetCPU)-$(TargetOS)\rcmount"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
